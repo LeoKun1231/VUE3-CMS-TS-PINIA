@@ -4,7 +4,7 @@
 
 首先该模板仅适用于 pc 端，使用了
 
-**VUE3**+**Pinia**+**Ts**+**tailwindcss**+**ElementPlus**+**VueRouter**+**VueUse**+**axios**
+**VUE3**+**Pinia**+**Pnpm**+**Ts**+**tailwindcss**+**ElementPlus**+**VueRouter**+**VueUse**+**axios**
 
 ## 使用步骤
 
