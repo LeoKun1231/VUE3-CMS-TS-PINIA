@@ -2,7 +2,7 @@
  * @Author: hqk
  * @Date: 2022-12-21 19:12:58
  * @LastEditors: hqk
- * @LastEditTime: 2022-12-22 14:36:27
+ * @LastEditTime: 2022-12-22 17:26:15
  * @Description:
 -->
 <script setup lang="ts">
@@ -22,7 +22,7 @@ const handleClick = () => {
       <el-button type="primary" @click="handleClick">+5</el-button>
     </div>
     <router-link to="/main">
-      <el-button type="primary">main</el-button>
+      <el-button type="primary">main11</el-button>
     </router-link>
     <router-link to="/login">
       <el-button type="success">login</el-button>
