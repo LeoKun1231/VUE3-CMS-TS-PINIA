@@ -2,7 +2,7 @@
  * @Author: hqk
  * @Date: 2022-12-21 19:12:58
  * @LastEditors: hqk
- * @LastEditTime: 2022-12-22 17:26:15
+ * @LastEditTime: 2022-12-22 19:55:02
  * @Description:
 -->
 <script setup lang="ts">
@@ -11,7 +11,9 @@ import '@/services'
 const counterStore = useCounterStore()
 
 const handleClick = () => {
-  counterStore.incrementCount(5)
+  counterStore.count = counterStore.count + 5
+  console.log(counterStore.count)
+  // counterStore.incrementCount(5)
 }
 </script>
 
