@@ -1,11 +1,19 @@
+/*
+ * @Author: hqk
+ * @Date: 2022-12-20 21:47:04
+ * @LastEditors: hqk
+ * @LastEditTime: 2022-12-22 20:39:17
+ * @Description:
+ */
 {
   "extends": "@vue/tsconfig/tsconfig.web.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "auto-imports.d.ts", "components.d.ts"],
+  "include": ["src/**/*", "src/**/*.vue", "env.d.ts", "auto-imports.d.ts", "components.d.ts"],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "types": ["element-plus/global"]
   },
 
   "references": [
