@@ -1,46 +1,29 @@
-# vue3-cms-pinia
+# vue3-PC-Template
 
-This template should help get you started developing with Vue 3 in Vite.
+## 介绍
 
-## Recommended IDE Setup
+首先该模板仅适用于 pc 端，使用了
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+**VUE3**+**Pinia**+**Ts**+**tailwindcss**+**ElementPlus**+**VueRouter**+**VueUse**+**axios**
 
-## Type Support for `.vue` Imports in TS
+## 使用步骤
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-pnpm install
 ```
-
-### Compile and Hot-Reload for Development
-
-```sh
+pnpm install
+pnpm lint
 pnpm dev
 ```
 
-### Type-Check, Compile and Minify for Production
+## 上传代码注意
 
-```sh
-pnpm build
+该模板使用了 husky+commitizen 管里提交代码，所以，你应该按如下步骤进行提交
+
+```
+git add .
+pnpm commit
+git push origin main
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+## IDE 推荐使用 VScode
 
-```sh
-pnpm lint
-```
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
