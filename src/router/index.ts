@@ -2,7 +2,7 @@
  * @Author: hqk
  * @Date: 2022-12-21 19:09:44
  * @LastEditors: hqk
- * @LastEditTime: 2022-12-21 19:21:43
+ * @LastEditTime: 2022-12-23 15:35:28
  * @Description:
  */
 import { createRouter, createWebHashHistory } from 'vue-router'
@@ -11,7 +11,7 @@ import type { RouteRecordRaw } from 'vue-router'
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    redirect: '/main'
+    redirect: '/login'
   },
   {
     path: '/main',
