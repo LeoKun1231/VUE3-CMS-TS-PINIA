@@ -2,18 +2,21 @@
  * @Author: hqk
  * @Date: 2022-12-23 12:12:21
  * @LastEditors: hqk
- * @LastEditTime: 2022-12-23 18:45:57
+ * @LastEditTime: 2022-12-25 15:33:39
  * @Description:
 -->
 <script setup lang="ts">
 import PaneAccount from './pane-account.vue'
 import PanePhone from './pane-phone.vue'
+import useLoginStore from '@/store/login/login'
 
 const activeTabName = ref('account')
-const isKeepPassword = ref(false)
+const isKeepPassword = useLocalStorage('account', { isKeepPassword: false }, { mergeDefaults: true })
 
 const paneAccount = ref<InstanceType<typeof PaneAccount>>()
 const panePhone = ref<InstanceType<typeof PanePhone>>()
+
+const loginStore = useLoginStore()
 
 //判断是否是帐号登录
 const isAccount = computed(() => {
@@ -27,7 +30,7 @@ const isAccount = computed(() => {
 const handleLoginAction = () => {
   //判断是帐号登录还是手机
   if (isAccount) {
-    paneAccount.value?.loginAction()
+    paneAccount.value?.loginAction(isKeepPassword.value.isKeepPassword)
   } else {
     // panePhone.value
   }
@@ -42,17 +45,16 @@ const handleLoginAction = () => {
         <el-tab-pane name="account">
           <template #label>
             <div class="flex items-center justify-center">
-              <!-- <el-icon><UserFilled /></el-icon> -->
               <i-ep-user-filled />
               <span class="ml-1">帐号登录</span>
             </div>
           </template>
-          <pane-account ref="paneAccount" :is-keep-password="isKeepPassword" />
+          <pane-account ref="paneAccount" />
         </el-tab-pane>
         <el-tab-pane name="phone">
           <template #label>
             <div class="flex items-center justify-center">
-              <!-- <el-icon><Iphone /></el-icon> -->
+              <i-ep-iphone />
               <span class="ml-1">手机登录</span>
             </div>
           </template>
@@ -62,13 +64,15 @@ const handleLoginAction = () => {
     </div>
 
     <div class="login-pane__handle-password flex items-center justify-between" v-if="isAccount">
-      <el-checkbox v-model="isKeepPassword" label="记住密码" size="large" />
+      <el-checkbox v-model="isKeepPassword.isKeepPassword" label="记住密码" size="large" />
       <el-link type="primary" :underline="false">忘记密码</el-link>
     </div>
     <div class="h-10 w-full" v-else></div>
 
     <div class="login-pane__sumbit">
-      <el-button auto-insert-space type="primary" class="w-full" size="large" @click="handleLoginAction">立即登录</el-button>
+      <el-button auto-insert-space type="primary" class="w-full" size="large" @click="handleLoginAction" :loading="loginStore.isLogining"
+        >立即登录</el-button
+      >
     </div>
   </div>
 </template>

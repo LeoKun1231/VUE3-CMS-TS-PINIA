@@ -2,7 +2,7 @@
  * @Author: hqk
  * @Date: 2022-12-23 12:22:53
  * @LastEditors: hqk
- * @LastEditTime: 2022-12-23 13:22:16
+ * @LastEditTime: 2022-12-24 13:04:07
  * @Description:
 -->
 <script setup lang="ts">
@@ -21,7 +21,10 @@ const phone = reactive({
         <el-input v-model="phone.number" />
       </el-form-item>
       <el-form-item label="验证码">
-        <el-input v-model="phone.verificationCode" />
+        <div class="flex items-center">
+          <el-input v-model="phone.verificationCode" />
+          <el-button type="primary" class="ml-2">发送验证码</el-button>
+        </div>
       </el-form-item>
     </el-form>
   </div>

@@ -2,7 +2,7 @@
  * @Author: hqk
  * @Date: 2022-12-21 19:12:48
  * @LastEditors: hqk
- * @LastEditTime: 2022-12-23 13:13:28
+ * @LastEditTime: 2022-12-26 11:51:59
  * @Description:
 -->
 <script setup lang="ts">
@@ -11,7 +11,7 @@ import LoginPane from './c-cpns/login-pane.vue'
 
 <template>
   <div class="login flex justify-center items-center !bg-no-repeat !bg-center">
-    <login-pane />
+    <login-pane class="animate-bounce-in animate-duration-1000" />
   </div>
 </template>
 <style scoped lang="less">

@@ -2,20 +2,14 @@
  * @Author: hqk
  * @Date: 2022-12-23 12:21:14
  * @LastEditors: hqk
- * @LastEditTime: 2022-12-23 18:23:40
+ * @LastEditTime: 2022-12-24 20:34:51
  * @Description:
 -->
 <script setup lang="ts">
 import useLoginStore from '@/store/login/login'
 
-import type { ILoginAccount } from '@/types'
+import type { LoginAccount } from '@/types'
 import type { FormInstance, FormRules } from 'element-plus'
-
-interface Props {
-  isKeepPassword: boolean
-}
-
-const props = defineProps<Props>()
 
 //本地存储帐号密码
 const accountStorage = useLocalStorage('account', {
@@ -24,7 +18,7 @@ const accountStorage = useLocalStorage('account', {
 })
 
 //帐号密码
-const account = reactive<ILoginAccount>({
+const account = reactive<LoginAccount>({
   name: accountStorage.value.name,
   password: accountStorage.value.password
 })
@@ -56,7 +50,7 @@ const rules: FormRules = {
  * @description:登录
  * @return {*}
  */
-const loginAction = () => {
+const loginAction = (isKeepPassword: boolean) => {
   formRef.value?.validate((vaild) => {
     //校验通过
     if (vaild) {
@@ -64,7 +58,7 @@ const loginAction = () => {
       const password = account.password
       loginStore.accountLoginAction({ name, password }).then(() => {
         //根据记住密码，保存帐号密码
-        if (props.isKeepPassword) {
+        if (isKeepPassword) {
           accountStorage.value.name = account.name
           accountStorage.value.password = account.password
         } else {
