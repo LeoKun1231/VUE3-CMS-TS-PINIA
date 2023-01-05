@@ -2,7 +2,7 @@
  * @Author: hqk
  * @Date: 2022-12-20 21:47:04
  * @LastEditors: hqk
- * @LastEditTime: 2022-12-23 18:09:14
+ * @LastEditTime: 2022-12-26 10:57:28
  * @Description:
  */
 import { fileURLToPath, URL } from 'node:url'
@@ -10,9 +10,13 @@ import { defineConfig } from 'vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-//导入图标
+
+//自动导入图标
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
+
+import Unocss from 'unocss/vite'
+import presetUno from 'unocss/preset-uno'
 import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
@@ -23,7 +27,7 @@ export default defineConfig({
       // Auto import functions from Vue, e.g. ref, reactive, toRef...
       // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
       // 自动导入vueuse 以及pinia的storeToRefs
-      imports: ['vue', '@vueuse/core', { pinia: ['storeToRefs'] }],
+      imports: ['vue', '@vueuse/core', { pinia: ['storeToRefs'] }, 'vue-router'],
       resolvers: [
         // Auto import functions from Element Plus, e.g. ElMessage, ElMessageBox... (with style)
         // 自动导入 Element Plus 相关函数，如：ElMessage, ElMessageBox... (带样式)
@@ -49,6 +53,9 @@ export default defineConfig({
     }),
     Icons({
       autoInstall: true
+    }),
+    Unocss({
+      presets: [presetUno()]
     })
   ],
   resolve: {
