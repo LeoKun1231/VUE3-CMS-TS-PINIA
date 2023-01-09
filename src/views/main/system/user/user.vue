@@ -2,29 +2,41 @@
  * @Author: hqk
  * @Date: 2023-01-02 13:10:40
  * @LastEditors: hqk
- * @LastEditTime: 2023-01-05 17:38:59
+ * @LastEditTime: 2023-01-09 19:19:03
  * @Description:
 -->
 <script setup lang="ts">
-import userSearch from './c-cpns/user-search.vue'
-import userContent from './c-cpns/user-content.vue'
-import userModal from './c-cpns/user-modal.vue'
+import PageContent from '@/components/page-content/page-content.vue'
+import PageModal from '@/components/page-modal/page-modal.vue'
+import PageSearch from '@/components/page-search/page-search.vue'
+import useAddDept2Config from '@/hooks/useAddDept2Config'
+import useAddRole2Config from '@/hooks/useAddRole2Config'
+import usePageContent from '@/hooks/usePageContent'
+import usePageModal from '@/hooks/usePageModal'
+import { formatTime } from '@/utils/format-time'
 
-const userModalRef = ref<InstanceType<typeof userModal>>()
-function handleCreate() {
-  userModalRef.value?.setDialogVisible()
-}
+import { modalConfig } from './config/modal.config'
+import { searchConfig } from './config/search.config'
+import { tableConfig } from './config/table.config'
 
-function handleEdit(userInfo: any) {
-  userModalRef.value?.setDialogVisible(false, userInfo)
-}
+const { handleQuery, handleReset, pageContentRef } = usePageContent()
+const { handleCreate, handleEdit, pageModalRef } = usePageModal()
+const { modalConfigRef: modalConfigRefForDept } = useAddDept2Config(modalConfig)
+const { modalConfigRef } = useAddRole2Config(modalConfigRefForDept.value)
 </script>
 
 <template>
   <div class="user">
-    <user-search />
-    <user-content class="mt-5" @create="handleCreate" @edit="handleEdit" />
-    <user-modal ref="userModalRef" />
+    <page-search @query="handleQuery" @reset="handleReset" :search-config="searchConfig" />
+    <page-content :table-config="tableConfig" @create="handleCreate" @edit="handleEdit" ref="pageContentRef">
+      <template #createAt="scope">
+        <span>{{ formatTime(scope.row.createAt) }}</span>
+      </template>
+      <template #updateAt="scope">
+        <span>{{ formatTime(scope.row.updateAt) }}</span>
+      </template>
+    </page-content>
+    <page-modal :modal-config="modalConfigRef" ref="pageModalRef" />
   </div>
 </template>
 <style scoped lang="less"></style>
