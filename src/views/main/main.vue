@@ -2,7 +2,7 @@
  * @Author: hqk
  * @Date: 2022-12-21 19:12:58
  * @LastEditors: hqk
- * @LastEditTime: 2023-01-04 15:40:30
+ * @LastEditTime: 2023-01-09 19:16:56
  * @Description:
 -->
 <script setup lang="ts">
@@ -12,6 +12,14 @@ import useMainStore from '@/store/main/main'
 
 const mainStore = useMainStore()
 const { isMenuExpand } = storeToRefs(mainStore)
+
+const route = useRoute()
+watch(
+  () => route.path,
+  () => {
+    mainStore.resetPageAction()
+  }
+)
 </script>
 
 <template>
