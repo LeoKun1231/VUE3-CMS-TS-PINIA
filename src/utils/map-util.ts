@@ -2,7 +2,7 @@
  * @Author: hqk
  * @Date: 2023-01-02 15:32:58
  * @LastEditors: hqk
- * @LastEditTime: 2023-01-03 12:37:30
+ * @LastEditTime: 2023-01-12 16:50:17
  * @Description:
  */
 
@@ -110,4 +110,37 @@ export function mapPath2Breadcrumb(path: string, menus: any[]) {
     }
   }
   return breadcrumb
+}
+
+export function mapMenuInfo2Tree(menuInfo: any[]) {
+  function recursionMenuInfo(items: any[]) {
+    for (const item of items) {
+      if (item.children) {
+        item.value = item.id
+        item.label = item.name
+        recursionMenuInfo(item.children ?? [])
+      } else {
+        item.value = item.id
+        item.label = item.name
+      }
+    }
+  }
+  recursionMenuInfo(menuInfo)
+  return menuInfo
+}
+
+export function mapMenuChecked(menuList: any[]) {
+  const checkedId: number[] = []
+
+  function recursionMenuList(items: any[]) {
+    for (const item of items) {
+      if (item.children) {
+        recursionMenuList(item.children ?? [])
+      } else {
+        checkedId.push(item.id)
+      }
+    }
+  }
+  recursionMenuList(menuList)
+  return checkedId
 }

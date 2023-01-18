@@ -2,7 +2,7 @@
  * @Author: hqk
  * @Date: 2023-01-06 20:47:14
  * @LastEditors: hqk
- * @LastEditTime: 2023-01-09 16:18:52
+ * @LastEditTime: 2023-01-15 15:26:49
  * @Description:
  */
 
@@ -29,7 +29,7 @@ export const searchConfig: SearchConfig = {
       placeholder: '请输入查询的手机号码'
     },
     {
-      type: 'input',
+      type: 'select',
       prop: 'enable',
       label: '状态',
       placeholder: '请选择状态',

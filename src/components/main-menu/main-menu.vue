@@ -2,14 +2,14 @@
  * @Author: hqk
  * @Date: 2022-12-24 20:57:19
  * @LastEditors: hqk
- * @LastEditTime: 2023-01-02 18:43:09
+ * @LastEditTime: 2023-01-15 18:29:29
  * @Description:
 -->
 <script setup lang="ts">
 import router from '@/router'
 import useLoginStore from '@/store/login/login'
 import useMainStore from '@/store/main/main'
-import { firstShowMenu, mapPath2Menu } from '@/utils/map-routes'
+import { firstShowMenu, mapPath2Menu } from '@/utils/map-util'
 import { Icon } from '@iconify/vue'
 
 const loginStore = useLoginStore()
@@ -26,7 +26,7 @@ function handleELMenuClick(url: any) {
 const route = useRoute()
 const defaultActiveMenu = computed(() => {
   const menu = mapPath2Menu(route.path, menuInfo.value)
-  if (!menu) return firstShowMenu.id + ''
+  if (!menu) return firstShowMenu?.id + ''
   return menu?.id + ''
 })
 </script>

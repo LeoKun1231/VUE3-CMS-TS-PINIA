@@ -2,15 +2,14 @@
  * @Author: hqk
  * @Date: 2022-12-23 17:36:44
  * @LastEditors: hqk
- * @LastEditTime: 2023-01-05 14:55:48
+ * @LastEditTime: 2023-01-15 19:11:31
  * @Description:
  */
 import { defineStore } from 'pinia'
 import router from '@/router'
 import type { LoginAccount, MenuInfo, UserInfo } from '@/types'
 import { accountLoginRequest, getUserInfoRequest, getUserMenusRequest } from '@/services/login/login'
-import type { RouteRecordRaw } from 'vue-router'
-import mapMenu2Routes from '@/utils/map-routes'
+import mapMenu2Routes from '@/utils/map-util'
 import useMainStore from '../main/main'
 
 const useLoginStore = defineStore('login', {
@@ -37,8 +36,8 @@ const useLoginStore = defineStore('login', {
       const { data: menuInfo } = await getUserMenusRequest(userInfo.role.id)
 
       // 4.根据用户菜单匹配本地route动态注册路由
-      this.refreshData()
       this.menuInfo = menuInfo
+      this.refreshData()
 
       this.isLogining = false
       ElMessage.success({ message: '登陆成功' })

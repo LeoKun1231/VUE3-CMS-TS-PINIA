@@ -2,7 +2,7 @@
  * @Author: hqk
  * @Date: 2023-01-08 15:13:48
  * @LastEditors: hqk
- * @LastEditTime: 2023-01-09 16:59:31
+ * @LastEditTime: 2023-01-10 17:54:28
  * @Description:
  */
 
@@ -15,7 +15,7 @@ interface SelectOptions {
 
 export interface AppFormItems extends Partial<FormItemProps> {
   initialValue?: string
-  type?: 'input' | 'select' | 'date-picker'
+  type?: 'input' | 'select' | 'date-picker' | 'custom'
   placeholder?: string
   options?: SelectOptions[]
 }

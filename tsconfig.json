@@ -2,12 +2,12 @@
  * @Author: hqk
  * @Date: 2022-12-20 21:47:04
  * @LastEditors: hqk
- * @LastEditTime: 2022-12-24 20:52:31
+ * @LastEditTime: 2023-01-15 20:15:06
  * @Description:
  */
 {
   "extends": "@vue/tsconfig/tsconfig.web.json",
-  "include": ["src/**/*", "src/**/*.vue", "env.d.ts", "components.d.ts", "auto-imports.d.ts"],
+  "include": ["src/**/*", "src/**/*.vue", "env.d.ts", "components.d.ts", "auto-imports.d.ts", "./src/types/editor/custom-types.d.ts"],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {

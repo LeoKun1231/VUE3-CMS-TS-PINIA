@@ -1,4 +1,11 @@
-<script setup lang="ts">
+<!--
+ * @Author: hqk
+ * @Date: 2023-01-02 13:10:40
+ * @LastEditors: hqk
+ * @LastEditTime: 2023-01-12 18:33:21
+ * @Description:
+-->
+<script lang="ts" setup>
 import PageContent from '@/components/page-content/page-content.vue'
 import PageModal from '@/components/page-modal/page-modal.vue'
 import PageSearch from '@/components/page-search/page-search.vue'
@@ -9,8 +16,31 @@ import { searchConfig } from './config/search.config'
 import { tableConfig } from './config/table.config'
 import { formatTime } from '@/utils/format-time'
 
+import useMainStore from '@/store/main/main'
+import type { ElTree } from 'element-plus'
+import { mapMenuChecked, mapMenuInfo2Tree } from '@/utils/map-util'
+
+const elTreeRef = ref<InstanceType<typeof ElTree>>()
+
 const { handleQuery, handleReset, pageContentRef } = usePageContent()
-const { handleCreate, handleEdit, pageModalRef } = usePageModal()
+const { handleCreate, handleEdit, pageModalRef } = usePageModal(
+  () => {
+    elTreeRef.value?.setCheckedKeys([])
+  },
+  (roleInfo: any) => {
+    const checkedId = mapMenuChecked(roleInfo.menuList)
+    console.log(checkedId)
+    elTreeRef.value?.setCheckedKeys(checkedId)
+  }
+)
+
+const mainStore = useMainStore()
+
+const { menuList } = storeToRefs(mainStore)
+
+const menuListComputed = computed(() => {
+  return mapMenuInfo2Tree(menuList.value as any[])
+})
 </script>
 
 <template>
@@ -24,7 +54,11 @@ const { handleCreate, handleEdit, pageModalRef } = usePageModal()
         <span>{{ formatTime(scope.row.updateAt) }}</span>
       </template>
     </page-content>
-    <page-modal :modal-config="modalConfig" ref="pageModalRef" />
+    <page-modal :modal-config="modalConfig" ref="pageModalRef">
+      <template #menuList>
+        <el-tree :data="menuListComputed" show-checkbox node-key="id" ref="elTreeRef" />
+      </template>
+    </page-modal>
   </div>
 </template>
 <style scoped lang="less"></style>

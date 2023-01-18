@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import useLoginStore from '@/store/login/login'
 import useMainStore from '@/store/main/main'
-import { mapPath2Breadcrumb } from '@/utils/map-routes'
+import { mapPath2Breadcrumb } from '@/utils/map-util'
 
 const mainStore = useMainStore()
 const handleMenuControl = () => {

@@ -4,7 +4,7 @@ import type { TableColumnCtx } from 'element-plus'
  * @Author: hqk
  * @Date: 2023-01-06 19:54:43
  * @LastEditors: hqk
- * @LastEditTime: 2023-01-08 14:48:08
+ * @LastEditTime: 2023-01-11 10:47:34
  * @Description:
  */
 
@@ -19,4 +19,11 @@ export interface TableConfig<T = any> {
   }
   pageName: string
   propsList: AppTableColumn<T>[]
+  table?: {
+    rowKey?: string
+    treeProps?: {
+      hasChildren?: string
+      children?: string
+    }
+  }
 }

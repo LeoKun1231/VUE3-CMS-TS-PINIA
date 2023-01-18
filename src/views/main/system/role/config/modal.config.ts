@@ -22,6 +22,11 @@ export const modalConfig: ModalConfig = {
       label: '权限介绍',
       prop: 'intro',
       placeholder: '请输入权限介绍'
+    },
+    {
+      type: 'custom',
+      label: '菜单列表',
+      prop: 'menuList'
     }
   ]
 }
