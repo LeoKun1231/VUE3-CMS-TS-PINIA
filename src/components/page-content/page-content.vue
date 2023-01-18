@@ -2,7 +2,7 @@
  * @Author: hqk
  * @Date: 2023-01-04 15:29:02
  * @LastEditors: hqk
- * @LastEditTime: 2023-01-09 19:17:19
+ * @LastEditTime: 2023-01-15 17:32:16
  * @Description:
 -->
 <script setup lang="ts">
@@ -51,7 +51,6 @@ function handleCurrentChange() {
 }
 
 function queryDataList(data?: any) {
-  console.log(data)
   mainStore.queryDataListAction(props.tableConfig.pageName, data)
 }
 
@@ -73,7 +72,13 @@ defineExpose({
       <div class="text-5 font-bold">{{ tableConfig.header.title }}</div>
       <el-button type="primary" class="!text-4" size="large" @click="handleCreateUser">{{ tableConfig.header.btnText }}</el-button>
     </div>
-    <el-table class="content-table mt-2 w-full" :data="dataList" border>
+    <el-table
+      class="content-table mt-2 w-full"
+      :data="dataList"
+      border
+      :row-key="tableConfig.table?.rowKey"
+      :tree-props="tableConfig.table?.treeProps"
+    >
       <template v-for="item in tableConfig.propsList" :key="item.prop">
         <template v-if="item.type == 'selection'">
           <el-table-column type="selection" v-bind="item" />

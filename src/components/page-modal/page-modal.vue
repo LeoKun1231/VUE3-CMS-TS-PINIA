@@ -2,7 +2,7 @@
  * @Author: hqk
  * @Date: 2023-01-04 15:32:23
  * @LastEditors: hqk
- * @LastEditTime: 2023-01-09 18:48:31
+ * @LastEditTime: 2023-01-15 19:43:01
  * @Description:
 -->
 <script setup lang="ts">
@@ -11,6 +11,7 @@ import type { ModalConfig } from '@/types/config/modal.config'
 
 interface Prop {
   modalConfig: ModalConfig
+  otherInfo?: any
 }
 
 const props = defineProps<Prop>()
@@ -33,7 +34,7 @@ const mainStore = useMainStore()
 //处理提交
 function handleConfirm() {
   if (isCreateRef.value) {
-    mainStore.createNewDataAction(props.modalConfig.pageName, formData).then(() => {
+    mainStore.createNewDataAction(props.modalConfig.pageName, { ...formData, ...props.otherInfo }).then(() => {
       dialogVisible.value = false
     })
   } else {
@@ -52,7 +53,6 @@ function setDialogVisible(isCreate = true, formInfo?: any) {
     for (const key in formData) {
       formData[key] = formInfo[key]
     }
-    console.log(formData)
   } else {
     //创建之前先清空数据
     for (const key in formData) {
@@ -60,6 +60,14 @@ function setDialogVisible(isCreate = true, formInfo?: any) {
     }
   }
   dialogVisible.value = true
+}
+
+function isHidden(data: any) {
+  if (!isCreateRef.value && (data == null || data == undefined || data == '')) {
+    return false
+  } else {
+    return true
+  }
 }
 
 defineExpose({
@@ -70,21 +78,26 @@ defineExpose({
 <template>
   <div class="modal">
     <el-dialog v-model="dialogVisible" :title="modalConfig.title" width="30%" center>
-      <el-form :model="formData" size="large" label-width="100px">
+      <el-form :model="formData" size="large" label-width="100px" class="!max-h-[50vh] overflow-y-scroll pr-2">
         <template v-for="item in modalConfig.formItems" :key="item.prop">
-          <template v-if="item.type == 'input'">
+          <template v-if="item.type == 'input' && isHidden(formData[item.prop  as string])">
             <el-form-item :label="item.label" v-if="item.prop != 'password' || isCreateRef">
               <el-input v-model="formData[item.prop as string]" />
             </el-form-item>
           </template>
 
-          <template v-else-if="item.type == 'select'">
+          <template v-else-if="item.type == 'select' && isHidden(formData[item.prop  as string])">
             <el-form-item :label="item.label">
               <el-select class="w-full" v-model="formData[item.prop as string]">
                 <template v-for="option in item.options" :key="option.value">
                   <el-option v-bind="option"></el-option>
                 </template>
               </el-select>
+            </el-form-item>
+          </template>
+          <template v-else-if="item.type == 'custom' && isHidden(formData[item.prop  as string])">
+            <el-form-item :label="item.label" class="max-h-40 overflow-y-scroll">
+              <slot :name="item.prop" v-bind="formData"></slot>
             </el-form-item>
           </template>
         </template>

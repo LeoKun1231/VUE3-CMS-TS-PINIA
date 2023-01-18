@@ -2,7 +2,7 @@
  * @Author: hqk
  * @Date: 2023-01-04 15:28:27
  * @LastEditors: hqk
- * @LastEditTime: 2023-01-08 21:48:00
+ * @LastEditTime: 2023-01-15 14:23:29
  * @Description:
 -->
 <script setup lang="ts">
@@ -61,6 +61,15 @@ function handleSearch() {
                   start-placeholder="开始时间"
                   end-placeholder="结束时间"
                 />
+              </el-form-item>
+            </template>
+            <template v-else-if="item.type == 'select'">
+              <el-form-item :label="item.label">
+                <el-select class="w-full" v-model="searchFormData[item.prop as string]">
+                  <template v-for="option in item.options" :key="option.value">
+                    <el-option v-bind="option"></el-option>
+                  </template>
+                </el-select>
               </el-form-item>
             </template>
           </el-col>

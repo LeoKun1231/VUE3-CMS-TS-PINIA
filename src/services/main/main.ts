@@ -2,11 +2,11 @@
  * @Author: hqk
  * @Date: 2023-01-05 14:21:06
  * @LastEditors: hqk
- * @LastEditTime: 2023-01-09 10:06:17
+ * @LastEditTime: 2023-01-11 21:23:50
  * @Description:
  */
 import appRequest from '..'
-import type { DepartmentListData, RoleListData } from '@/types'
+import type { DepartmentListData, MenuListData, RoleListData } from '@/types'
 
 export function postRoleList() {
   return appRequest.post<RoleListData>({
@@ -25,6 +25,12 @@ export function postDepartmentList() {
       offset: 0,
       size: 1000
     }
+  })
+}
+
+export function postMenuList() {
+  return appRequest.post<MenuListData>({
+    url: '/menu/list'
   })
 }
 

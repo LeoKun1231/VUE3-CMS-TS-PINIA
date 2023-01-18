@@ -2,7 +2,7 @@
  * @Author: hqk
  * @Date: 2022-12-23 12:12:21
  * @LastEditors: hqk
- * @LastEditTime: 2022-12-25 15:33:39
+ * @LastEditTime: 2023-01-16 13:19:46
  * @Description:
 -->
 <script setup lang="ts">
@@ -70,9 +70,9 @@ const handleLoginAction = () => {
     <div class="h-10 w-full" v-else></div>
 
     <div class="login-pane__sumbit">
-      <el-button auto-insert-space type="primary" class="w-full" size="large" @click="handleLoginAction" :loading="loginStore.isLogining"
-        >立即登录</el-button
-      >
+      <el-button auto-insert-space type="primary" class="w-full" size="large" @click="handleLoginAction" :loading="loginStore.isLogining">
+        立即登录
+      </el-button>
     </div>
   </div>
 </template>

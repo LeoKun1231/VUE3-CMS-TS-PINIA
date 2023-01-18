@@ -2,11 +2,12 @@
  * @Author: hqk
  * @Date: 2022-12-20 21:47:04
  * @LastEditors: hqk
- * @LastEditTime: 2022-12-26 10:57:28
+ * @LastEditTime: 2023-01-17 13:06:25
  * @Description:
  */
 import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
+
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
@@ -18,6 +19,9 @@ import IconsResolver from 'unplugin-icons/resolver'
 import Unocss from 'unocss/vite'
 import presetUno from 'unocss/preset-uno'
 import vue from '@vitejs/plugin-vue'
+
+//gzip
+// import VitePluginCompression from 'vite-plugin-compression'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -57,10 +61,25 @@ export default defineConfig({
     Unocss({
       presets: [presetUno()]
     })
+    // Gzip
+    // VitePluginCompression()
   ],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
+  },
+  build: {
+    // rollupOptions: {
+    //   output: {
+    //     manualChunks: {
+    //       echarts: ['echarts']
+    //     }
+    //   }
+    // }
+    //   关闭生成map文件 可以达到缩小打包体积
+    // sourcemap: false
+    //   关闭文件计算
+    // reportCompressedSize: false
   }
 })
