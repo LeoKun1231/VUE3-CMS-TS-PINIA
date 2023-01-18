@@ -2,7 +2,7 @@
  * @Author: hqk
  * @Date: 2023-01-02 15:32:58
  * @LastEditors: hqk
- * @LastEditTime: 2023-01-12 16:50:17
+ * @LastEditTime: 2023-01-18 13:59:43
  * @Description:
  */
 
@@ -18,7 +18,7 @@ export function getLocalRoutes() {
     const module = files[file]
     localRoutes.push(module.default)
   }
-  return localRoutes
+  return localRoutes.filter((item) => item.path != '/main/analysis/overview')
 }
 
 export let firstShowMenu: any = null

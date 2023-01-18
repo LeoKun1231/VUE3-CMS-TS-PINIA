@@ -2,7 +2,7 @@
  * @Author: hqk
  * @Date: 2023-01-04 15:32:23
  * @LastEditors: hqk
- * @LastEditTime: 2023-01-15 19:43:01
+ * @LastEditTime: 2023-01-18 14:34:59
  * @Description:
 -->
 <script setup lang="ts">
@@ -78,7 +78,7 @@ defineExpose({
 <template>
   <div class="modal">
     <el-dialog v-model="dialogVisible" :title="modalConfig.title" width="30%" center>
-      <el-form :model="formData" size="large" label-width="100px" class="!max-h-[50vh] overflow-y-scroll pr-2">
+      <el-form :model="formData" size="large" label-width="100px" class="pr-2">
         <template v-for="item in modalConfig.formItems" :key="item.prop">
           <template v-if="item.type == 'input' && isHidden(formData[item.prop  as string])">
             <el-form-item :label="item.label" v-if="item.prop != 'password' || isCreateRef">
@@ -96,7 +96,7 @@ defineExpose({
             </el-form-item>
           </template>
           <template v-else-if="item.type == 'custom' && isHidden(formData[item.prop  as string])">
-            <el-form-item :label="item.label" class="max-h-40 overflow-y-scroll">
+            <el-form-item :label="item.label">
               <slot :name="item.prop" v-bind="formData"></slot>
             </el-form-item>
           </template>

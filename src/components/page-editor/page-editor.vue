@@ -2,7 +2,7 @@
  * @Author: hqk
  * @Date: 2022-09-05 13:51:37
  * @LastEditors: hqk
- * @LastEditTime: 2023-01-17 22:01:03
+ * @LastEditTime: 2023-01-18 13:09:50
  * @Description:
 -->
 <script setup lang="ts">
@@ -73,13 +73,6 @@ watch(
 const handleChange = () => {
   emits('update:modelValue', editorRef.value.getHtml())
 }
-
-const clearText = () => {
-  editorRef.value.setHtml('<span></span>')
-}
-defineExpose({
-  clearText
-})
 </script>
 
 <template>
