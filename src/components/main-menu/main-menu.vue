@@ -2,7 +2,7 @@
  * @Author: hqk
  * @Date: 2022-12-24 20:57:19
  * @LastEditors: hqk
- * @LastEditTime: 2023-01-15 18:29:29
+ * @LastEditTime: 2023-01-18 13:59:36
  * @Description:
 -->
 <script setup lang="ts">
@@ -45,7 +45,12 @@ const defaultActiveMenu = computed(() => {
             <span class="ml-2">{{ item.name }}</span>
           </template>
           <template v-for="subItem in item.children" :key="subItem.id">
-            <el-menu-item :index="subItem.id + ''" @click="handleELMenuClick(subItem.url)">{{ subItem.name }}</el-menu-item>
+            <el-menu-item
+              v-if="subItem.url != '/main/analysis/overview'"
+              :index="subItem.id + ''"
+              @click="handleELMenuClick(subItem.url)"
+              >{{ subItem.name }}</el-menu-item
+            >
           </template>
         </el-sub-menu>
       </template>
