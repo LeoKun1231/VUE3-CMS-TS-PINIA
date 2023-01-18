@@ -26,6 +26,7 @@
     "lint-staged": "^13.1.0",
     "pinia": "^2.0.28",
     "pinia-plugin-persistedstate": "^3.0.1",
+    "vite-plugin-compression": "^0.5.1",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"
   },
@@ -44,6 +45,7 @@
     "eslint": "^8.22.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-vue": "^9.3.0",
+    "http-proxy-middleware": "^2.0.6",
     "husky": "^8.0.0",
     "postcss": "^8.4.20",
     "prettier": "^2.7.1",
