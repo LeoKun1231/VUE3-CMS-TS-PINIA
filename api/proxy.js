@@ -10,7 +10,7 @@ const { createProxyMiddleware } = require('http-proxy-middleware')
 module.exports = (req, res) => {
   let target = '' // 如果请求以/proxy开头，则将代理转发的目标设为需要请求的http接口
   if (req.url.startsWith('/proxy')) {
-    target = import.meta.env.VITE_BASE_URL
+    target = 'http://111.230.245.205:8880'
   } // 创建代理对象并转发请求
 
   createProxyMiddleware({
