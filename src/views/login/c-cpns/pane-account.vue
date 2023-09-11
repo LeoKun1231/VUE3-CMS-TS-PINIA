@@ -1,9 +1,10 @@
 <!--
- * @Author: hqk
- * @Date: 2022-12-23 12:21:14
- * @LastEditors: hqk
- * @LastEditTime: 2023-01-16 12:52:50
- * @Description:
+ * @Author: Leo l024983409@qq.com
+ * @Date: 2023-01-18 12:59:07
+ * @LastEditors: Leo l024983409@qq.com
+ * @LastEditTime: 2023-09-11 17:53:14
+ * @FilePath: \VUE3-CMS-TS-PINIA\src\views\login\c-cpns\pane-account.vue
+ * @Description: 
 -->
 <script setup lang="ts">
 import useLoginStore from '@/store/login/login'
@@ -13,8 +14,8 @@ import type { FormInstance, FormRules } from 'element-plus'
 
 //本地存储帐号密码
 const accountStorage = useLocalStorage('account', {
-  name: '',
-  password: ''
+  name: 'coderwhy',
+  password: '123456'
 })
 
 //帐号密码
