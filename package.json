@@ -11,7 +11,7 @@
     "prettier": "prettier --write .",
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky install",
-    "commit": "pnpm cz"
+    "commit": "git add . & pnpm cz"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",
