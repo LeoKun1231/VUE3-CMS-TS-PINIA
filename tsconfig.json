@@ -3,6 +3,7 @@
   "extends": "@vue/tsconfig/tsconfig.web.json",
   "include": ["src/**/*", "src/**/*.vue", "env.d.ts", "components.d.ts", "auto-imports.d.ts", "./src/types/editor/custom-types.d.ts"],
   "compilerOptions": {
+    "ignoreDeprecations": "5.0",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
