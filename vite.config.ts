@@ -2,7 +2,7 @@
  * @Author: hqk
  * @Date: 2022-12-20 21:47:04
  * @LastEditors: Leo l024983409@qq.com
- * @LastEditTime: 2023-10-12 13:19:29
+ * @LastEditTime: 2023-10-12 14:09:59
  * @Description:
  */
 import { fileURLToPath, URL } from 'node:url'
@@ -81,5 +81,14 @@ export default defineConfig({
     // sourcemap: false
     //   关闭文件计算
     // reportCompressedSize: false
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://codercba.com:5000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
   }
 })
