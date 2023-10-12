@@ -1,4 +1,4 @@
 [[redirects]]
-  from = "/api"
+  from = "/api/*"
   to = "http://codercba.com:5000"
   status = 200
