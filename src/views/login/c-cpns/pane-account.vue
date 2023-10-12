@@ -2,7 +2,7 @@
  * @Author: Leo l024983409@qq.com
  * @Date: 2023-01-18 12:59:07
  * @LastEditors: Leo l024983409@qq.com
- * @LastEditTime: 2023-10-12 12:31:31
+ * @LastEditTime: 2023-10-12 14:06:12
  * @FilePath: \VUE3-CMS-TS-PINIA\src\views\login\c-cpns\pane-account.vue
  * @Description: 
 -->
@@ -26,6 +26,12 @@ const account = reactive<LoginAccount>({
 
 const formRef = ref<FormInstance>()
 const loginStore = useLoginStore()
+
+onMounted(() => {
+  //自动聚焦
+  accountStorage.value.name = 'coderwhy'
+  accountStorage.value.password = '123456'
+})
 
 //校验规则
 const rules: FormRules = {
