@@ -20,18 +20,12 @@ const accountStorage = useLocalStorage('account', {
 
 //帐号密码
 const account = reactive<LoginAccount>({
-  name: accountStorage.value.name,
-  password: accountStorage.value.password
+  name: accountStorage.value.name || 'coderwhy',
+  password: accountStorage.value.password || '123456'
 })
 
 const formRef = ref<FormInstance>()
 const loginStore = useLoginStore()
-
-onMounted(() => {
-  //自动聚焦
-  accountStorage.value.name = 'coderwhy'
-  accountStorage.value.password = '123456'
-})
 
 //校验规则
 const rules: FormRules = {
