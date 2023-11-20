@@ -1,4 +1,4 @@
 [[redirects]]
   from = "/api/*"
-  to = "http://hqk10.xyz:3000/api/v1:splat"
+  to = "http://hqk10.xyz:3000/api/v1/:splat"
   status = 200
