@@ -5,7 +5,7 @@
  * @LastEditTime: 2022-12-24 14:48:03
  * @Description:
  */
-import type { LoginAccount, LoginData, UserInfoData, MenuInfoData } from '@/types'
+import type { LoginAccount, LoginData, MenuInfoData, UserInfoData } from '@/types'
 import appRequest from '..'
 
 export function accountLoginRequest(account: LoginAccount) {

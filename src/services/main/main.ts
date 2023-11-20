@@ -5,8 +5,8 @@
  * @LastEditTime: 2023-01-11 21:23:50
  * @Description:
  */
+import type { DepartmentListData, ICategoryListData, MenuListData, RoleListData } from '@/types'
 import appRequest from '..'
-import type { DepartmentListData, MenuListData, RoleListData } from '@/types'
 
 export function postRoleList() {
   return appRequest.post<RoleListData>({
@@ -64,5 +64,11 @@ export function deleteDataById(pageName: string, id: number) {
 export function queryDataById(pageName: string, id: number) {
   return appRequest.get({
     url: `/${pageName}/${id}`
+  })
+}
+
+export function queryCategoryList() {
+  return appRequest.get<ICategoryListData>({
+    url: '/category/all'
   })
 }

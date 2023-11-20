@@ -16,6 +16,10 @@ interface Prop {
 
 const props = defineProps<Prop>()
 
+const emits = defineEmits<{
+  (e: 'close'): void
+}>()
+
 const dialogVisible = ref(false)
 
 const initialValue: any = {}
@@ -38,7 +42,7 @@ function handleConfirm() {
       dialogVisible.value = false
     })
   } else {
-    mainStore.patchDataAction(props.modalConfig.pageName, editId.value, formData).then(() => {
+    mainStore.patchDataAction(props.modalConfig.pageName, editId.value, { ...formData, ...props.otherInfo }).then(() => {
       dialogVisible.value = false
       editId.value = null
     })
@@ -62,12 +66,8 @@ function setDialogVisible(isCreate = true, formInfo?: any) {
   dialogVisible.value = true
 }
 
-function isHidden(data: any) {
-  if (!isCreateRef.value && (data == null || data == undefined || data == '')) {
-    return false
-  } else {
-    return true
-  }
+const handleClose = () => {
+  emits('close')
 }
 
 defineExpose({
@@ -77,27 +77,32 @@ defineExpose({
 
 <template>
   <div class="modal">
-    <el-dialog v-model="dialogVisible" :title="modalConfig.title" width="30%" center>
+    <el-dialog @close="handleClose" v-model="dialogVisible" :title="modalConfig.title" width="30%" center draggable top="5vh">
       <el-form :model="formData" size="large" label-width="100px" class="pr-2">
         <template v-for="item in modalConfig.formItems" :key="item.prop">
-          <template v-if="item.type == 'input' && isHidden(formData[item.prop  as string])">
+          <template v-if="item.type == 'input'">
             <el-form-item :label="item.label" v-if="item.prop != 'password' || isCreateRef">
               <el-input v-model="formData[item.prop as string]" />
             </el-form-item>
           </template>
 
-          <template v-else-if="item.type == 'select' && isHidden(formData[item.prop  as string])">
+          <template v-else-if="item.type == 'select'">
             <el-form-item :label="item.label">
-              <el-select class="w-full" v-model="formData[item.prop as string]">
+              <el-select class="w-full" clearable v-model="formData[item.prop as string]">
                 <template v-for="option in item.options" :key="option.value">
                   <el-option v-bind="option"></el-option>
                 </template>
               </el-select>
             </el-form-item>
           </template>
-          <template v-else-if="item.type == 'custom' && isHidden(formData[item.prop  as string])">
+          <template v-else-if="item.type == 'upload'">
             <el-form-item :label="item.label">
-              <slot :name="item.prop" v-bind="formData"></slot>
+              <image-upload v-model="formData[item.prop as string]" />
+            </el-form-item>
+          </template>
+          <template v-else-if="item.type == 'custom'">
+            <el-form-item :label="item.label">
+              <slot :name="item.prop"></slot>
             </el-form-item>
           </template>
         </template>
@@ -111,4 +116,9 @@ defineExpose({
     </el-dialog>
   </div>
 </template>
-<style scoped lang="less"></style>
+<style scoped lang="less">
+:deep(.el-dialog__body) {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+</style>

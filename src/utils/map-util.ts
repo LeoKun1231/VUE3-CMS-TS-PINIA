@@ -97,7 +97,7 @@ export function mapPath2Menu(path: string, menus: any[]): any {
 export function mapPath2Breadcrumb(path: string, menus: any[]) {
   const breadcrumb: any[] = []
   for (const menu of menus) {
-    for (const subMenu of menu.children) {
+    for (const subMenu of menu.children || []) {
       if (subMenu.url == path) {
         breadcrumb.push({
           name: menu.name,

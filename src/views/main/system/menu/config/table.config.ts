@@ -20,6 +20,7 @@ export const tableConfig: TableConfig = {
     { prop: 'url', label: '路径', align: 'center', slotName: 'url' },
     { prop: 'icon', label: '图标', align: 'center', slotName: 'icon' },
     { prop: 'sort', label: '排序', align: 'center', slotName: 'sort' },
+    { type: 'switch', prop: 'enable', label: '状态', align: 'center', width: '100px', slotName: 'enable' },
     { prop: 'permission', label: '权限', align: 'center', slotName: 'permission' },
     { prop: 'createAt', label: '创建时间', align: 'center', width: '200px', slotName: 'createAt' },
     { prop: 'updateAt', label: '更新时间', align: 'center', width: '200px', slotName: 'updateAt' },

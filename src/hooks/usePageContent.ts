@@ -6,15 +6,18 @@
  * @Description:
  */
 import type PageContent from '@/components/page-content/page-content.vue'
+import type { MaybeRef } from 'vue'
+import { useToValueDeep } from './useToValueDeep'
 
-const usePageContent = () => {
+type ResetCallback = () => void
+const usePageContent = (otherSearch?: Record<string, MaybeRef>, resetCallback?: ResetCallback) => {
   const pageContentRef = ref<InstanceType<typeof PageContent>>()
-
   function handleQuery(searchData: any) {
-    pageContentRef.value?.queryDataList(searchData)
+    pageContentRef.value?.queryDataList({ ...searchData, ...useToValueDeep(otherSearch) })
   }
 
   function handleReset() {
+    resetCallback && resetCallback()
     pageContentRef.value?.resetDataList()
   }
 

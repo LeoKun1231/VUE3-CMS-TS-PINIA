@@ -9,31 +9,40 @@
 import PageContent from '@/components/page-content/page-content.vue'
 import PageModal from '@/components/page-modal/page-modal.vue'
 import PageSearch from '@/components/page-search/page-search.vue'
+import useAddGoodsCategoryConfig from '@/hooks/useAddGoodsCategory2Config'
 import usePageContent from '@/hooks/usePageContent'
 import usePageModal from '@/hooks/usePageModal'
+import useMainStore from '@/store/main/main'
+import { formatTime } from '@/utils/format-time'
 import { modalConfig } from './config/modal.config'
 import { searchConfig } from './config/search.config'
 import { tableConfig } from './config/table.config'
-import { formatTime } from '@/utils/format-time'
+
+const mainStore = useMainStore()
+const categoryIds = computed(() => {
+  return mainStore.categoryList.map((item) => item.id)
+})
 
 const { handleQuery, handleReset, pageContentRef } = usePageContent()
-const { handleCreate, handleEdit, pageModalRef } = usePageModal()
+const { handleCreate, handleEdit, pageModalRef } = usePageModal(undefined, (goods) => {
+  if (!categoryIds.value.find((item) => item == goods.categoryId)) {
+    goods.categoryId = ''
+  }
+})
+
+const { configRef: modalConfigRef } = useAddGoodsCategoryConfig(modalConfig)
+const { configRef: searchConfigRef } = useAddGoodsCategoryConfig(searchConfig)
 </script>
 
 <template>
   <div class="goods">
-    <page-search :search-config="searchConfig" @reset="handleReset" @query="handleQuery" />
+    <page-search :search-config="searchConfigRef" @reset="handleReset" @query="handleQuery"> </page-search>
     <page-content ref="pageContentRef" @create="handleCreate" @edit="handleEdit" :table-config="tableConfig">
       <template #oldPrice="scope">
         <span>{{ '￥' + scope.row.oldPrice }}</span>
       </template>
       <template #newPrice="scope">
         <span>{{ '￥' + scope.row.newPrice }}</span>
-      </template>
-      <template #status="scope">
-        <el-button :type="scope.row.status == 1 ? 'success' : 'danger'" class="!w-full" size="small">
-          {{ scope.row.status == 1 ? '可用' : '下架' }}
-        </el-button>
       </template>
       <template #imgUrl="scope">
         <el-image
@@ -51,7 +60,7 @@ const { handleCreate, handleEdit, pageModalRef } = usePageModal()
         <span>{{ formatTime(scope.row.updateAt) }}</span>
       </template>
     </page-content>
-    <page-modal ref="pageModalRef" :modal-config="modalConfig" />
+    <page-modal ref="pageModalRef" :modal-config="modalConfigRef"> </page-modal>
   </div>
 </template>
 <style scoped lang="less">

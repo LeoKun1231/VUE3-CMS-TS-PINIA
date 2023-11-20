@@ -1,15 +1,8 @@
 <!--
  * @Author: hqk
  * @Date: 2022-12-26 20:29:49
- * @LastEditors: hqk
- * @LastEditTime: 2023-01-03 12:39:12
- * @Description:
--->
-<!--
- * @Author: hqk
- * @Date: 2022-12-26 20:29:49
- * @LastEditors: hqk
- * @LastEditTime: 2022-12-26 20:30:10
+ * @LastEditors: Leo l024983409@qq.com
+ * @LastEditTime: 2023-11-14 22:01:28
  * @Description:
 -->
 <script setup lang="ts">
@@ -35,7 +28,7 @@ const handleClick = (url: string) => {
 </script>
 
 <template>
-  <div class="info flex items-center">
+  <div class="info center-y">
     <el-icon size="20px" @click="handleMenuControl" class="cursor-pointer">
       <i-ep-expand v-if="mainStore.isMenuExpand" />
       <i-ep-fold v-else />

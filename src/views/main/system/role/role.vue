@@ -11,14 +11,14 @@ import PageModal from '@/components/page-modal/page-modal.vue'
 import PageSearch from '@/components/page-search/page-search.vue'
 import usePageContent from '@/hooks/usePageContent'
 import usePageModal from '@/hooks/usePageModal'
+import { formatTime } from '@/utils/format-time'
 import { modalConfig } from './config/modal.config'
 import { searchConfig } from './config/search.config'
 import { tableConfig } from './config/table.config'
-import { formatTime } from '@/utils/format-time'
 
 import useMainStore from '@/store/main/main'
-import type { ElTree } from 'element-plus'
 import { mapMenuChecked, mapMenuInfo2Tree } from '@/utils/map-util'
+import type { ElTree } from 'element-plus'
 
 const elTreeRef = ref<InstanceType<typeof ElTree>>()
 
@@ -29,8 +29,9 @@ const { handleCreate, handleEdit, pageModalRef } = usePageModal(
   },
   (roleInfo: any) => {
     const checkedId = mapMenuChecked(roleInfo.menuList)
-    console.log(checkedId)
-    elTreeRef.value?.setCheckedKeys(checkedId)
+    setTimeout(() => {
+      elTreeRef.value?.setCheckedKeys(checkedId)
+    }, 1)
   }
 )
 
@@ -41,6 +42,14 @@ const { menuList } = storeToRefs(mainStore)
 const menuListComputed = computed(() => {
   return mapMenuInfo2Tree(menuList.value as any[])
 })
+
+const otherInfo = ref({
+  menuList: []
+})
+
+const handleCheckChange = () => {
+  otherInfo.value.menuList = elTreeRef.value?.getCheckedKeys() as any
+}
 </script>
 
 <template>
@@ -54,9 +63,9 @@ const menuListComputed = computed(() => {
         <span>{{ formatTime(scope.row.updateAt) }}</span>
       </template>
     </page-content>
-    <page-modal :modal-config="modalConfig" ref="pageModalRef">
+    <page-modal :modal-config="modalConfig" ref="pageModalRef" :other-info="otherInfo">
       <template #menuList>
-        <el-tree :data="menuListComputed" show-checkbox node-key="id" ref="elTreeRef" />
+        <el-tree :data="menuListComputed" show-checkbox node-key="id" ref="elTreeRef" @check-change="handleCheckChange" />
       </template>
     </page-modal>
   </div>

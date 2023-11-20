@@ -7,7 +7,7 @@
  */
 
 import appRequest from '@/services'
-import type { CreateStoryData, StoryListParams, StoryListData } from '@/types/main/story/story'
+import type { CreateStoryData, StoryListData, StoryListParams } from '@/types/main/story/story'
 
 export function createNewStory(data: CreateStoryData) {
   return appRequest.post({

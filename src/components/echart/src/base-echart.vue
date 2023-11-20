@@ -6,8 +6,8 @@
  * @Description:
 -->
 <script setup lang="ts">
-import * as echarts from 'echarts'
 import type { EChartsOption } from 'echarts'
+import * as echarts from 'echarts'
 import ChinaJSON from '../data/china.json'
 
 interface Prop {
@@ -47,7 +47,7 @@ onMounted(() => {
 <template>
   <div class="bg-white p-4 shadow-lg">
     <div class="h-8 border-b">{{ title }}</div>
-    <div class="echart w-full items-center justify-center h-fit rounded-xl" ref="echartRef"></div>
+    <div class="echart w-full center h-fit rounded-xl" ref="echartRef"></div>
   </div>
 </template>
 <style scoped lang="less"></style>

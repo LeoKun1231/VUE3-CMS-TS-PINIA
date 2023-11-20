@@ -11,10 +11,10 @@ import PageModal from '@/components/page-modal/page-modal.vue'
 import PageSearch from '@/components/page-search/page-search.vue'
 import usePageContent from '@/hooks/usePageContent'
 import usePageModal from '@/hooks/usePageModal'
+import { formatTime } from '@/utils/format-time'
 import { modalConfig } from './config/modal.config'
 import { searchConfig } from './config/search.config'
 import { tableConfig } from './config/table.config'
-import { formatTime } from '@/utils/format-time'
 
 const { handleQuery, handleReset, pageContentRef } = usePageContent()
 const { handleCreate, handleEdit, pageModalRef } = usePageModal()

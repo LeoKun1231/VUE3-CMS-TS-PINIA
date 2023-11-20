@@ -19,7 +19,7 @@ export const tableConfig: TableConfig = {
     { prop: 'oldPrice', label: '原价格', align: 'center', slotName: 'oldPrice' },
     { prop: 'newPrice', label: '新价格', align: 'center', slotName: 'newPrice' },
     { prop: 'desc', label: '商品描述', align: 'center', width: '120px', slotName: 'desc', showOverflowTooltip: true },
-    { prop: 'status', label: '状态', align: 'center', width: '80px', slotName: 'status' },
+    { type: 'switch', prop: 'status', label: '状态', align: 'center', width: '80px', slotName: 'status' },
     { prop: 'imgUrl', label: '图片', minWidth: '200px', align: 'center', slotName: 'imgUrl' },
     { prop: 'inventoryCount', label: '库存', align: 'center', slotName: 'inventoryCount' },
     { prop: 'saleCount', label: '销量', align: 'center', slotName: 'saleCount' },

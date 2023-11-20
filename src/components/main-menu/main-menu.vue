@@ -33,7 +33,7 @@ const defaultActiveMenu = computed(() => {
 
 <template>
   <div class="menu h-full w-full">
-    <h1 class="w-full h-16 flex items-center justify-center text-[#b7bdc3] bg-[#001529]">
+    <h1 class="w-full h-16 center text-[#b7bdc3] bg-[#001529]">
       <i-ep-element-plus />
       <span class="ml-1" v-show="!isMenuExpand">后台管理系统</span>
     </h1>
@@ -41,7 +41,7 @@ const defaultActiveMenu = computed(() => {
       <template v-for="item in menuInfo" :key="item.id">
         <el-sub-menu :index="item.id + ''">
           <template #title>
-            <el-icon><Icon :icon="`ep:${item.icon.split('el-icon-')[1]}`" /></el-icon>
+            <el-icon v-if="item.icon"><Icon :icon="`ep:${item.icon?.split('el-icon-')?.[1]}`" /></el-icon>
             <span class="ml-2">{{ item.name }}</span>
           </template>
           <template v-for="subItem in item.children" :key="subItem.id">

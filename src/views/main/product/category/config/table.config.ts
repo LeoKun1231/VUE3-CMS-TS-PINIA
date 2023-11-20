@@ -17,6 +17,7 @@ export const tableConfig: TableConfig = {
   propsList: [
     { type: 'index', label: '序号', align: 'center', width: '60px' },
     { prop: 'name', label: '商品名称', align: 'center', slotName: 'name' },
+    { type: 'switch', prop: 'enable', label: '状态', align: 'center', width: '100px', slotName: 'enable' },
     { prop: 'createAt', label: '创建时间', align: 'center', slotName: 'createAt' },
     { prop: 'updateAt', label: '更新时间', align: 'center', slotName: 'updateAt' },
     {

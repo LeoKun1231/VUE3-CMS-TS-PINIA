@@ -1,14 +1,14 @@
 /*
  * @Author: hqk
  * @Date: 2022-12-21 19:35:13
- * @LastEditors: hqk
- * @LastEditTime: 2022-12-21 19:52:58
+ * @LastEditors: Leo l024983409@qq.com
+ * @LastEditTime: 2023-11-15 09:59:08
  * @Description:
  */
-import type { AxiosRequestConfig, AxiosResponse } from 'axios'
+import type { AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 
 export interface AppInterceptor<T> {
-  requestSuccessFn?: (config: AxiosRequestConfig) => AxiosRequestConfig
+  requestSuccessFn?: (config: InternalAxiosRequestConfig) => InternalAxiosRequestConfig
   requestFailureFn?: (err: any) => any
   responseSuccessFn?: (res: T) => T
   responseFailureFn?: (err: any) => any

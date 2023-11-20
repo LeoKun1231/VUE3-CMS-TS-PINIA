@@ -1,8 +1,8 @@
 <!--
  * @Author: hqk
  * @Date: 2022-12-26 20:29:20
- * @LastEditors: hqk
- * @LastEditTime: 2023-01-02 14:29:16
+ * @LastEditors: Leo l024983409@qq.com
+ * @LastEditTime: 2023-11-13 17:19:02
  * @Description:
 -->
 <script setup lang="ts">
@@ -18,11 +18,11 @@ const handleLoginOut = () => {
 </script>
 
 <template>
-  <div class="info flex items-center animate-bounce-in-down">
+  <div class="info center-y animate-bounce-in-down">
     <el-icon size="20px" class="cursor-pointer animate-bounce-left hover:animate-bounce-alt !animate-iteration-1">
       <i-ep-message />
     </el-icon>
-    <el-badge is-dot class="!flex !items-center cursor-pointer hover:animate-bounce-alt !animate-iteration-1">
+    <el-badge is-dot class="!center-y cursor-pointer hover:animate-bounce-alt !animate-iteration-1">
       <el-icon size="20px" class="ml-4">
         <i-ep-chat-dot-square />
       </el-icon>

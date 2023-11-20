@@ -71,3 +71,14 @@ export interface MenuChildren {
   updateAt: string
   permission?: string
 }
+
+export interface ICategoryListData {
+  code: number
+  data: ICategoryListItem[]
+  message: string
+}
+
+export interface ICategoryListItem {
+  id: number
+  name: string
+}
