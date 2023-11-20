@@ -1,13 +1,13 @@
 <!--
  * @Author: hqk
  * @Date: 2023-01-02 13:10:39
- * @LastEditors: hqk
- * @LastEditTime: 2023-01-17 16:56:58
+ * @LastEditors: Leo l024983409@qq.com
+ * @LastEditTime: 2023-11-15 10:10:09
  * @Description:
 -->
 <script setup lang="ts">
+import { BarEchart, LineEchart, MapEchart, PieEchart, RoseEchart } from '@/components/echart'
 import PagePanel from '@/components/page-panel/page-panel.vue'
-import { PieEchart, MapEchart, RoseEchart, LineEchart, BarEchart } from '@/components/echart'
 import useAnalysisStore from '@/store/main/analysis/analysis'
 
 const analysisStore = useAnalysisStore()
@@ -15,24 +15,28 @@ const analysisStore = useAnalysisStore()
 analysisStore.getDashBoardDataAction()
 
 const goodsAddressSaleComputed = computed(() => {
-  return analysisStore.goodAddressSale.map((item) => {
-    return {
-      value: item.count,
-      name: item.address
-    }
-  })
+  return (
+    analysisStore.goodAddressSale?.map((item) => {
+      return {
+        value: item.count,
+        name: item.address
+      }
+    }) || []
+  )
 })
 
 const goodsCategoryCount = computed(() => {
-  return analysisStore.goodsCategoryCount.map((item) => ({
-    name: item.name,
-    value: item.goodsCount
-  }))
+  return (
+    analysisStore.goodsCategoryCount?.map((item) => ({
+      name: item.name,
+      value: item.goodsCount
+    })) || []
+  )
 })
 
 const goodsCategorySale = computed(() => {
-  const X = analysisStore.goodsCategorySale.map((item) => item.name)
-  const Y = analysisStore.goodsCategorySale.map((item) => item.goodsCount)
+  const X = analysisStore.goodsCategorySale?.map((item) => item.name) || []
+  const Y = analysisStore.goodsCategorySale?.map((item) => item.goodsCount) || []
   return { X, Y }
 })
 </script>

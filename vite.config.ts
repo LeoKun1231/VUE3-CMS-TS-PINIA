@@ -2,23 +2,23 @@
  * @Author: hqk
  * @Date: 2022-12-20 21:47:04
  * @LastEditors: Leo l024983409@qq.com
- * @LastEditTime: 2023-10-12 14:09:59
+ * @LastEditTime: 2023-11-14 21:58:10
  * @Description:
  */
 import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 
 import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import Components from 'unplugin-vue-components/vite'
 
 //自动导入图标
-import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
+import Icons from 'unplugin-icons/vite'
 
-import Unocss from 'unocss/vite'
-import presetUno from 'unocss/preset-uno'
 import vue from '@vitejs/plugin-vue'
+import presetUno from 'unocss/preset-uno'
+import Unocss from 'unocss/vite'
 
 //gzip
 import VitePluginCompression from 'vite-plugin-compression'
@@ -85,7 +85,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://codercba.com:5000',
+        target: 'http://hqk10.xyz:3000/api/v1',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
       }

@@ -15,7 +15,7 @@ interface SelectOptions {
 
 export interface AppFormItems extends Partial<FormItemProps> {
   initialValue?: string
-  type?: 'input' | 'select' | 'date-picker' | 'custom'
+  type?: 'input' | 'select' | 'date-picker' | 'number' | 'upload' | 'custom'
   placeholder?: string
   options?: SelectOptions[]
 }

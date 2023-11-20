@@ -39,9 +39,28 @@ export const searchConfig: SearchConfig = {
       ]
     },
     {
+      type: 'select',
+      prop: 'roleId',
+      label: '角色',
+      placeholder: '请选择状态',
+      options: []
+    },
+    {
+      type: 'select',
+      prop: 'departmentId',
+      label: '部门',
+      placeholder: '请选择部门',
+      options: []
+    },
+    {
       type: 'date-picker',
       prop: 'createAt',
       label: '创建时间'
+    },
+    {
+      type: 'date-picker',
+      prop: 'updateAt',
+      label: '更新时间'
     }
   ]
 }

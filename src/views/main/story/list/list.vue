@@ -13,8 +13,10 @@ const storyStore = useStoryStore()
 storyStore.postStoryListAction()
 
 function loadMoreStory() {
-  storyStore.pageSize = storyStore.pageSize + 5
-  storyStore.postStoryListAction()
+  if (storyStore.count > storyStore.storyList.length) {
+    storyStore.pageSize = storyStore.pageSize + 5
+    storyStore.postStoryListAction()
+  }
 }
 </script>
 
@@ -27,6 +29,7 @@ function loadMoreStory() {
 </template>
 <style scoped lang="less">
 .list {
+  height: 100%;
   &-comment {
     &:not(:first-child) {
       margin-top: 20px;

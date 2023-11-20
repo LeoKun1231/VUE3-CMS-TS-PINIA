@@ -6,22 +6,42 @@
  * @Description:
 -->
 <script setup lang="ts">
-import pageSearch from '@/components/page-search/page-search.vue'
 import pageContent from '@/components/page-content/page-content.vue'
 import pageModal from '@/components/page-modal/page-modal.vue'
+import pageSearch from '@/components/page-search/page-search.vue'
 
 import { searchConfig } from './config/search.config'
 import { tableConfig } from './config/table.config'
-import { modalConfig } from './config/modal.config'
 
-import { formatTime } from '@/utils/format-time'
+import useAddDept2Config from '@/hooks/useAddDept2Config'
 import usePageContent from '@/hooks/usePageContent'
 import usePageModal from '@/hooks/usePageModal'
-import useAddDept2Config from '@/hooks/useAddDept2Config'
+import useMainStore from '@/store/main/main'
+import type { DepartmentInfo } from '@/types'
+import { formatTime } from '@/utils/format-time'
+import { modalConfig } from './config/modal.config'
 
-const { modalConfigRef } = useAddDept2Config(modalConfig)
+const mainStore = useMainStore()
+
+const { configRef } = useAddDept2Config(modalConfig)
+
 const { handleQuery, handleReset, pageContentRef } = usePageContent()
-const { handleCreate, handleEdit, pageModalRef } = usePageModal()
+const copyDepartmentList = ref<DepartmentInfo[]>([])
+const { handleCreate, handleEdit, pageModalRef } = usePageModal(undefined, (department) => {
+  if (mainStore.departmentList) {
+    copyDepartmentList.value = mainStore.departmentList
+  }
+  //过滤掉自己
+  mainStore.departmentList = mainStore.departmentList?.filter((item) => item.id != department.id)
+  const departmentIds = mainStore.departmentList?.map((item) => item.id)
+  if (!departmentIds?.find((item) => item == department.parentId)) {
+    department.parentId = ''
+  }
+})
+
+const handleClose = () => {
+  mainStore.departmentList = copyDepartmentList.value
+}
 </script>
 
 <template>
@@ -35,7 +55,7 @@ const { handleCreate, handleEdit, pageModalRef } = usePageModal()
         <span>{{ formatTime(scope.row.updateAt) }}</span>
       </template>
     </page-content>
-    <page-modal ref="pageModalRef" :modal-config="modalConfigRef" />
+    <page-modal ref="pageModalRef" :modal-config="configRef" @close="handleClose" />
   </div>
 </template>
 <style scoped lang="less"></style>

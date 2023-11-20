@@ -40,23 +40,29 @@ function handleDelete(id: number) {
   mainStore.deleteDataByIdAction(props.tableConfig.pageName, id)
 }
 
-//处理页大小改变
-function handleSizeChange() {
-  queryDataList()
-}
+const queryData = ref({})
 
+//处理页大小改变
 //处理当前页码的改变
-function handleCurrentChange() {
-  queryDataList()
-}
+watch([currentPage, pageSize], () => {
+  queryDataList(queryData.value)
+})
 
 function queryDataList(data?: any) {
+  queryData.value = data
   mainStore.queryDataListAction(props.tableConfig.pageName, data)
+}
+
+function handleSwitchChange(row: any, itemProp: any) {
+  mainStore.patchDataAction(props.tableConfig.pageName, row.id, {
+    [itemProp]: row[itemProp]
+  })
 }
 
 //重置
 function resetDataList() {
   mainStore.resetPageAction()
+  queryData.value = {}
   queryDataList()
 }
 
@@ -85,6 +91,21 @@ defineExpose({
         </template>
         <template v-else-if="item.type == 'index'">
           <el-table-column type="index" v-bind="item" />
+        </template>
+        <template v-else-if="item.type == 'switch'">
+          <el-table-column v-bind="item">
+            <template #default="{ row }">
+              <el-switch
+                v-model="row[item.prop as string]"
+                :active-value="1"
+                :inactive-value="0"
+                inline-prompt
+                active-text="启用"
+                inactive-text="禁用"
+                @click="handleSwitchChange(row, item.prop)"
+              />
+            </template>
+          </el-table-column>
         </template>
         <template v-else-if="item.type == 'operate'">
           <el-table-column label="操作" align="center" width="200px">
@@ -126,8 +147,6 @@ defineExpose({
       :page-sizes="[10, 20, 30, 40]"
       layout="total, sizes, prev, pager, next, jumper"
       :total="count"
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
     />
   </div>
 </template>

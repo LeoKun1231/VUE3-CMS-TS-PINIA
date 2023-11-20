@@ -5,15 +5,14 @@
  * @LastEditTime: 2023-01-16 23:41:06
  * @Description:
  */
+import '@unocss/reset/tailwind.css'
 import { createApp } from 'vue'
 import App from './App.vue'
 
-import '@unocss/reset/tailwind.css'
-
 import '@/assets/css/index.less'
-import store from './store'
-import router from './router'
 import registerGlobal from './global'
+import router from './router'
+import store from './store'
 
 import 'uno.css'
 

@@ -1,5 +1,5 @@
-import axios from 'axios'
 import type { AxiosInstance } from 'axios'
+import axios from 'axios'
 import type AppRequestConfig from '../config/type'
 
 class AppRequest {
@@ -25,7 +25,6 @@ class AppRequest {
         return res.data
       },
       (err) => {
-        // console.log('全局响应成功')
         return err
       }
     )
@@ -38,7 +37,7 @@ class AppRequest {
   request<T = any>(config: AppRequestConfig<T>) {
     //方法拦截器
     if (config.interceptors?.requestSuccessFn) {
-      config = config.interceptors.requestSuccessFn(config)
+      config = config.interceptors.requestSuccessFn(config as any)
     }
 
     return new Promise<T>((resolve, reject) => {

@@ -6,9 +6,9 @@
  * @Description:
 -->
 <script setup lang="ts">
+import useLoginStore from '@/store/login/login'
 import PaneAccount from './pane-account.vue'
 import PanePhone from './pane-phone.vue'
-import useLoginStore from '@/store/login/login'
 
 const activeTabName = ref('account')
 const isKeepPassword = useLocalStorage('account', { isKeepPassword: false }, { mergeDefaults: true })
@@ -67,7 +67,7 @@ const handleLoginAction = () => {
       <el-checkbox v-model="isKeepPassword.isKeepPassword" label="记住密码" size="large" />
       <el-link type="primary" :underline="false">忘记密码</el-link>
     </div>
-    <div class="h-10 w-full" v-else></div>
+    <div class="h-[40px] w-full" v-else></div>
 
     <div class="login-pane__sumbit">
       <el-button auto-insert-space type="primary" class="w-full" size="large" @click="handleLoginAction" :loading="loginStore.isLogining">

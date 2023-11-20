@@ -1,8 +1,8 @@
 /*
  * @Author: hqk
  * @Date: 2022-12-26 13:28:47
- * @LastEditors: hqk
- * @LastEditTime: 2023-01-15 17:43:37
+ * @LastEditors: Leo l024983409@qq.com
+ * @LastEditTime: 2023-11-15 10:39:16
  * @Description:
  */
 import {
@@ -12,10 +12,11 @@ import {
   postDepartmentList,
   postMenuList,
   postRoleList,
+  queryCategoryList,
   queryDataList
 } from '@/services/main/main'
-import type { RoleInfo, DepartmentInfo } from '@/types'
-import type { MenuInfo } from '@/types/main/main'
+import type { DepartmentInfo, RoleInfo } from '@/types'
+import type { ICategoryListItem, MenuInfo } from '@/types/main/main'
 import { defineStore } from 'pinia'
 
 const useMainStore = defineStore('main', () => {
@@ -27,16 +28,20 @@ const useMainStore = defineStore('main', () => {
   //角色列表
   const departmentList = ref<DepartmentInfo[]>()
 
+  const categoryList = ref<ICategoryListItem[]>([])
+
   //菜单列表
   const menuList = ref<MenuInfo[]>()
 
-  async function postRoleAndDepartmentListAction() {
+  async function postAllListAction() {
     const roleListRes = await postRoleList()
     const departmentListRes = await postDepartmentList()
     const menuListRes = await postMenuList()
+    const categoryListRes = await queryCategoryList()
     roleList.value = roleListRes.data?.list
     departmentList.value = departmentListRes.data?.list
     menuList.value = menuListRes.data?.list
+    categoryList.value = categoryListRes.data
   }
 
   //通用信息
@@ -51,7 +56,7 @@ const useMainStore = defineStore('main', () => {
     showMessage(res)
     resetPageAction()
     queryDataListAction(pageName)
-    judgeQueryRoleAndDeptAgain(pageName)
+    queryAgain(pageName)
   }
 
   //修改数据
@@ -59,7 +64,7 @@ const useMainStore = defineStore('main', () => {
     const res = await patchData(pageName, id, data)
     showMessage(res)
     queryDataListAction(pageName)
-    judgeQueryRoleAndDeptAgain(pageName)
+    queryAgain(pageName)
   }
 
   //查询数据
@@ -69,8 +74,8 @@ const useMainStore = defineStore('main', () => {
       offset: (currentPage.value - 1) * pageSize.value,
       ...data
     })
-    dataList.value = res.data.list
-    count.value = res.data.totalCount
+    dataList.value = res.data?.list
+    count.value = res.data?.totalCount
   }
 
   //删除数据
@@ -78,15 +83,13 @@ const useMainStore = defineStore('main', () => {
     const res = await deleteDataById(pageName, id)
     showMessage(res)
     queryDataListAction(pageName)
-    judgeQueryRoleAndDeptAgain(pageName)
+    queryAgain(pageName)
   }
 
   //提示信息
   function showMessage(res: any) {
-    if (res.code == 0) {
-      ElMessage.success(res.data)
-    } else {
-      ElMessage.error(res.data)
+    if (res.code == 200) {
+      ElMessage.success(res.message)
     }
   }
 
@@ -96,10 +99,45 @@ const useMainStore = defineStore('main', () => {
     currentPage.value = 1
   }
 
-  //根据页面名称判断是否重新请求部门和角色列表
-  function judgeQueryRoleAndDeptAgain(pageName: string) {
-    if (pageName == 'department' || pageName == 'role') {
-      postRoleAndDepartmentListAction()
+  async function postMenuListDataAction() {
+    const menuListRes = await postMenuList()
+    menuList.value = menuListRes.data?.list
+  }
+
+  async function queryCategoryListAction() {
+    const categoryListRes = await queryCategoryList()
+    categoryList.value = categoryListRes.data
+  }
+
+  async function postRoleListAction() {
+    const roleListRes = await postRoleList()
+    roleList.value = roleListRes.data?.list
+  }
+
+  async function postDepartmentListAction() {
+    const departmentListRes = await postDepartmentList()
+    departmentList.value = departmentListRes.data?.list
+  }
+
+  async function queryAllUserNameAction() {}
+
+  //根据页面名称判断是否重新请求列表
+  function queryAgain(pageName: string) {
+    switch (pageName) {
+      case 'department':
+        postDepartmentListAction()
+        break
+      case 'role':
+        postRoleListAction()
+        break
+      case 'menu':
+        postMenuListDataAction()
+        break
+      case 'category':
+        queryCategoryListAction()
+        break
+      default:
+        break
     }
   }
 
@@ -108,7 +146,10 @@ const useMainStore = defineStore('main', () => {
     roleList,
     departmentList,
     menuList,
-    postRoleAndDepartmentListAction,
+    categoryList,
+    postAllListAction,
+    postMenuListDataAction,
+    queryCategoryListAction,
     dataList,
     count,
     pageSize,

@@ -41,7 +41,7 @@ export const modalConfig: ModalConfig = {
       placeholder: '请输入排序'
     },
     {
-      type: 'input',
+      type: 'custom',
       label: '图标',
       prop: 'icon',
       placeholder: '请输入图标'

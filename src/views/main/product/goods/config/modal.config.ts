@@ -18,6 +18,13 @@ export const modalConfig: ModalConfig = {
       placeholder: '请输入商品名称'
     },
     {
+      type: 'select',
+      label: '商品种类',
+      prop: 'categoryId',
+      placeholder: '请选择商品种类',
+      options: []
+    },
+    {
       type: 'input',
       label: '商品原价格',
       prop: 'oldPrice',
@@ -46,7 +53,7 @@ export const modalConfig: ModalConfig = {
       ]
     },
     {
-      type: 'input',
+      type: 'upload',
       label: '商品图片地址',
       prop: 'imgUrl',
       placeholder: '请输入商品图片地址'

@@ -6,30 +6,35 @@
  * @Description:
 -->
 <script setup lang="ts">
+import { IconSelect } from '@/components/icon-select'
 import PageContent from '@/components/page-content/page-content.vue'
 import PageModal from '@/components/page-modal/page-modal.vue'
 import usePageContent from '@/hooks/usePageContent'
 import usePageModal from '@/hooks/usePageModal'
-import { modalConfig } from './config/modal.config'
-import { tableConfig } from './config/table.config'
+import useMainStore from '@/store/main/main'
 import { formatTime } from '@/utils/format-time'
 import { mapMenuInfo2Tree } from '@/utils/map-util'
-import useMainStore from '@/store/main/main'
+import { Icon } from '@iconify/vue'
+import { modalConfig } from './config/modal.config'
+import { tableConfig } from './config/table.config'
 
 const { pageContentRef } = usePageContent()
 const { handleCreate, handleEdit, pageModalRef } = usePageModal(
   () => {
     otherInfo.parentId = ''
+    otherInfo.icon = ''
   },
   (info) => {
     otherInfo.parentId = info.parentId
+    otherInfo.icon = info.icon
   }
 )
 
 const mainStore = useMainStore()
 
 const otherInfo = reactive({
-  parentId: ''
+  parentId: '',
+  icon: ''
 })
 
 const menuInfoComputed = computed(() => {
@@ -40,6 +45,11 @@ const menuInfoComputed = computed(() => {
 <template>
   <div class="menu">
     <page-content :table-config="tableConfig" @create="handleCreate" @edit="handleEdit" ref="pageContentRef">
+      <template #icon="scope">
+        <el-icon v-if="scope.row.icon">
+          <Icon :icon="`ep:${scope.row.icon.split('el-icon-')[1]}`" />
+        </el-icon>
+      </template>
       <template #createAt="scope">
         <span>{{ formatTime(scope.row.createAt) }}</span>
       </template>
@@ -58,6 +68,9 @@ const menuInfoComputed = computed(() => {
           check-on-click-node
           class="w-full"
         />
+      </template>
+      <template #icon>
+        <icon-select v-model="otherInfo.icon" />
       </template>
     </page-modal>
   </div>

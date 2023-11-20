@@ -6,12 +6,12 @@
  * @Description:
 -->
 <script setup lang="ts">
-import HeaderInfo from './c-cpns/header-info.vue'
 import HeaderBreadcrumb from './c-cpns/header-breadcrumb.vue'
+import HeaderInfo from './c-cpns/header-info.vue'
 </script>
 
 <template>
-  <div class="header px-4 h-full flex justify-between items-center">
+  <div class="header px-4 h-full between">
     <header-breadcrumb />
     <header-info />
   </div>

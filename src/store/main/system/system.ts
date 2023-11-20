@@ -1,12 +1,12 @@
 /*
  * @Author: hqk
  * @Date: 2023-01-05 10:59:46
- * @LastEditors: hqk
- * @LastEditTime: 2023-01-05 17:47:59
+ * @LastEditors: Leo l024983409@qq.com
+ * @LastEditTime: 2023-11-15 10:39:26
  * @Description:
  */
 import { createUser, deleteUserById, patchUserById, postUserList } from '@/services/main/system/system'
-import type { SystemUserInfo, CreateUser, PatchUser } from '@/types'
+import type { CreateUser, PatchUser, SystemUserInfo } from '@/types'
 import { defineStore } from 'pinia'
 
 const useSystemStore = defineStore('system', () => {
@@ -44,12 +44,10 @@ const useSystemStore = defineStore('system', () => {
 
   //刷新用户列表
   function refreshUserList(res: any) {
-    if (res.code == 0) {
-      ElMessage.success(res.data)
+    if (res.code == 200) {
+      ElMessage.success(res.message)
       //删除成功，则重新请求列表
       postUserListAction()
-    } else {
-      ElMessage.error(res.data)
     }
   }
 

@@ -2,7 +2,7 @@
  * @Author: hqk
  * @Date: 2022-12-20 22:08:22
  * @LastEditors: Leo l024983409@qq.com
- * @LastEditTime: 2023-08-15 21:06:55
+ * @LastEditTime: 2023-11-15 09:40:10
  * @Description:
 -->
 <script setup lang="ts">
@@ -12,8 +12,6 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 
 const locale = ref(zhCn)
 </script>
-
-T's's
 
 <template>
   <div class="app">

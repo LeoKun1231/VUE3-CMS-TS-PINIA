@@ -7,20 +7,20 @@
  */
 import useMainStore from '@/store/main/main'
 
-const useAddDept2Config = (config: any) => {
+const useAddGoodsCategoryConfig = (config: any) => {
   const mainStore = useMainStore()
 
   const configRef = computed(() => {
-    const departmentList =
-      mainStore.departmentList?.map((item: any) => {
+    const categoryList =
+      mainStore.categoryList?.map((item: any) => {
         return {
           label: item.name,
           value: item.id
         }
       }) || []
     for (const item of config.formItems) {
-      if (item.prop == 'parentId' || item.prop == 'departmentId') {
-        item.options = [...departmentList]
+      if (item.prop == 'categoryId') {
+        item.options = [...categoryList]
       }
     }
     return config
@@ -30,4 +30,4 @@ const useAddDept2Config = (config: any) => {
   }
 }
 
-export default useAddDept2Config
+export default useAddGoodsCategoryConfig
