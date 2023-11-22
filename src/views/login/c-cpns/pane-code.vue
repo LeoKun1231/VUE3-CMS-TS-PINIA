@@ -22,7 +22,7 @@ const isLogin = ref(false)
 let timer: any = null
 
 const loginStore = useLoginStore()
-
+generateCode()
 watch(
   () => props.activeTabName,
   (val) => {
