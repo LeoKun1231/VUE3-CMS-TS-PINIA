@@ -15,11 +15,6 @@ export interface StoryListParams {
   size: number
 }
 
-export interface StoryListData {
-  code: number
-  data: StoryList
-}
-
 export interface StoryList {
   list: StoryInfo[]
   totalCount: number

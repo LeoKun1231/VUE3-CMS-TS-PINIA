@@ -19,12 +19,14 @@ const appRequest = new AppRequest({
   interceptors: {
     requestSuccessFn(config) {
       // console.log('实例请求成功')
-      ElLoadingInstance = ElLoading.service({
-        fullscreen: true,
-        lock: true,
-        text: '加载中...',
-        background: 'rgba(0, 0, 0, 0.5)'
-      })
+      if (config!.showLoading) {
+        ElLoadingInstance = ElLoading.service({
+          fullscreen: true,
+          lock: true,
+          text: '加载中...',
+          background: 'rgba(0, 0, 0, 0.5)'
+        })
+      }
       //添加token
       const loginStore = useLoginStore()
       if (loginStore.token.length > 0 && config.headers) {
@@ -34,7 +36,9 @@ const appRequest = new AppRequest({
     },
     responseSuccessFn(res) {
       if (res instanceof AxiosError) {
-        ElLoadingInstance.close()
+        if (ElLoadingInstance) {
+          ElLoadingInstance.close()
+        }
         //如果是401，则跳转到登录页面
         if (res.response?.status == 401) {
           ElMessage.error({
@@ -50,8 +54,9 @@ const appRequest = new AppRequest({
 
         return res
       }
-      // console.log('实例响应成功')
-      ElLoadingInstance.close()
+      if (ElLoadingInstance) {
+        ElLoadingInstance.close()
+      }
       return res
     }
   }

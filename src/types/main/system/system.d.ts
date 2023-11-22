@@ -15,11 +15,6 @@ export interface SystemUserList {
   totalCount: number
 }
 
-export interface SystemUserListData {
-  code: number
-  data: SystemUserList
-}
-
 export interface CreateUser {
   name: string
   realname: string

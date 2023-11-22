@@ -1,10 +1,5 @@
 export * from './system/system'
 
-export interface RoleListData {
-  code: number
-  data: RoleList
-}
-
 export interface RoleList {
   list: RoleInfo[]
   totalCount: number
@@ -19,11 +14,6 @@ export interface RoleInfo {
   menuList: any[]
 }
 
-export interface DepartmentListData {
-  code: number
-  data: DepartmentList
-}
-
 export interface DepartmentList {
   list: DepartmentInfo[]
   totalCount: number
@@ -36,11 +26,6 @@ export interface DepartmentInfo {
   createAt: string
   updateAt: string
   leader: string
-}
-
-export interface MenuListData {
-  code: number
-  data: MenuList
 }
 
 export interface MenuList {
@@ -70,12 +55,6 @@ export interface MenuChildren {
   parentId: number
   updateAt: string
   permission?: string
-}
-
-export interface ICategoryListData {
-  code: number
-  data: ICategoryListItem[]
-  message: string
 }
 
 export interface ICategoryListItem {

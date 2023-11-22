@@ -1,8 +1,3 @@
-export interface GoodsAmountListData {
-  code: number
-  data: GoodsAmountInfo[]
-}
-
 export interface GoodsAmountInfo {
   amount: string
   title: string
@@ -12,19 +7,9 @@ export interface GoodsAmountInfo {
   number2: number
 }
 
-export interface GoodsAddressSaleData {
-  code: number
-  data: GoodsAddressSale[]
-}
-
 export interface GoodsAddressSale {
   address: string
   count: number
-}
-
-export interface GoodsCategoryData {
-  code: number
-  data: GoodsCategory[]
 }
 
 export interface GoodsCategory {
@@ -33,20 +18,10 @@ export interface GoodsCategory {
   goodsCount: number
 }
 
-export interface GoodsCategoryFavorData {
-  code: number
-  data: GoodsCategoryFavor[]
-}
-
 export interface GoodsCategoryFavor {
   id: number
   name: string
   goodsFavor: number
-}
-
-export interface GoodsSaleTop10Data {
-  code: number
-  data: GoodsSaleTop10[]
 }
 
 export interface GoodsSaleTop10 {

@@ -5,11 +5,11 @@
  * @LastEditTime: 2023-01-11 21:23:50
  * @Description:
  */
-import type { DepartmentListData, ICategoryListData, MenuListData, RoleListData } from '@/types'
+import type { DepartmentList, ICategoryListItem, MenuList, RoleList } from '@/types'
 import appRequest from '..'
 
 export function postRoleList() {
-  return appRequest.post<RoleListData>({
+  return appRequest.post<RoleList>({
     url: '/role/list',
     data: {
       offset: 0,
@@ -19,7 +19,7 @@ export function postRoleList() {
 }
 
 export function postDepartmentList() {
-  return appRequest.post<DepartmentListData>({
+  return appRequest.post<DepartmentList>({
     url: '/department/list',
     data: {
       offset: 0,
@@ -29,7 +29,7 @@ export function postDepartmentList() {
 }
 
 export function postMenuList() {
-  return appRequest.post<MenuListData>({
+  return appRequest.post<MenuList>({
     url: '/menu/list'
   })
 }
@@ -68,7 +68,7 @@ export function queryDataById(pageName: string, id: number) {
 }
 
 export function queryCategoryList() {
-  return appRequest.get<ICategoryListData>({
+  return appRequest.get<ICategoryListItem[]>({
     url: '/category/all'
   })
 }

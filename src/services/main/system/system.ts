@@ -5,11 +5,11 @@
  * @LastEditTime: 2023-01-05 18:32:02
  * @Description:
  */
-import type { CreateUser, PatchUser, SystemUserListData } from '@/types'
+import type { CreateUser, PatchUser, SystemUserList } from '@/types'
 import appRequest from '../..'
 
 export function postUserList(data: any) {
-  return appRequest.post<SystemUserListData>({
+  return appRequest.post<SystemUserList>({
     url: '/users/list',
     data
   })

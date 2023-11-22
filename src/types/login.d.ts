@@ -16,11 +16,6 @@ export interface LoginInfo {
   token: string
 }
 
-export interface LoginData {
-  code: number
-  data: LoginInfo
-}
-
 export interface Role {
   id: number
   name: string
@@ -50,11 +45,6 @@ export interface UserInfo {
   department: Department
 }
 
-export interface UserInfoData {
-  code: string
-  data: UserInfo
-}
-
 export interface MenuInfo {
   id: number
   name: string
@@ -76,7 +66,11 @@ export interface MenuInfoChildren {
   permission?: string
 }
 
-export interface MenuInfoData {
-  code: string
-  data: MenuInfo[]
+export interface GenerateCodeInfo {
+  id: string
+  url: string
+}
+
+export interface CheckStatus {
+  status: number
 }
