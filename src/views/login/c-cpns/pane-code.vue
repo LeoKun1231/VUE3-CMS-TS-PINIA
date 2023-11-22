@@ -29,6 +29,7 @@ async function checkStatus() {
   const { status } = data
   currentStatus.value = status
   if (status == ScanStatusEnum.Confirmed) {
+    console.log('login=====================')
     clearInterval(timer)
     if (isLogin.value) return
     loginStore.accountLoginAction({
@@ -62,9 +63,9 @@ async function generateCode() {
   url.value = data.url
 
   if (timer) clearInterval(timer)
-  timer = setInterval(() => {
-    checkStatus()
-  }, 1000)
+  timer = setInterval(async () => {
+    await checkStatus()
+  }, 1500)
 }
 
 onUnmounted(() => {
