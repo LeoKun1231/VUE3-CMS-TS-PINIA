@@ -34,10 +34,12 @@ const useMainStore = defineStore('main', () => {
   const menuList = ref<MenuInfo[]>()
 
   async function postAllListAction() {
-    const roleListRes = await postRoleList()
-    const departmentListRes = await postDepartmentList()
-    const menuListRes = await postMenuList()
-    const categoryListRes = await queryCategoryList()
+    const [roleListRes, departmentListRes, menuListRes, categoryListRes] = await Promise.all([
+      postRoleList(),
+      postDepartmentList(),
+      postMenuList(),
+      queryCategoryList()
+    ])
     roleList.value = roleListRes.data?.list
     departmentList.value = departmentListRes.data?.list
     menuList.value = menuListRes.data?.list
