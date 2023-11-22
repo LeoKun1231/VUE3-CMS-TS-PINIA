@@ -66,7 +66,7 @@ async function generateCode() {
   if (timer) clearInterval(timer)
   timer = setInterval(() => {
     checkStatus()
-  }, 1500)
+  }, 1000)
 }
 
 onUnmounted(() => {
