@@ -6,52 +6,28 @@
  * @Description:
 -->
 <script setup lang="ts">
-import QRCODE from '@/assets/img/qrcode.png'
 import { ScanStatusEnum } from '@/enums/scan-status.enum'
 import { checkStatusRequest, generateQrcodeRequest } from '@/services/login/login'
 import useLoginStore from '@/store/login/login'
+import { defineProps, onUnmounted, ref, watch } from 'vue'
+
 const props = defineProps<{
   activeTabName: string
 }>()
 
 const id = ref('')
 const url = ref('')
-generateCode()
-
-const refresh = () => {
-  generateCode()
-}
-
-const loginStore = useLoginStore()
 const currentStatus = ref<ScanStatusEnum>(ScanStatusEnum.NotScan)
 const isLogin = ref(false)
-
-async function checkStatus() {
-  const { data } = await checkStatusRequest(id.value)
-  const { status } = data
-  currentStatus.value = status
-  if (status == ScanStatusEnum.Confirmed) {
-    clearInterval(timer)
-    if (isLogin.value) return
-    loginStore.accountLoginAction({
-      name: 'admin1',
-      password: '123456'
-    })
-    isLogin.value = true
-  } else if (status == ScanStatusEnum.Expired) {
-    clearInterval(timer)
-  } else if (status == ScanStatusEnum.Canceled) {
-    clearInterval(timer)
-  }
-}
-
 let timer: any = null
+
+const loginStore = useLoginStore()
 
 watch(
   () => props.activeTabName,
   (val) => {
     if (val !== 'code') {
-      if (timer) clearInterval(timer)
+      clearTimer()
     } else {
       generateCode()
     }
@@ -63,15 +39,37 @@ async function generateCode() {
   id.value = data.id
   url.value = data.url
 
-  if (timer) clearInterval(timer)
-  timer = setInterval(() => {
-    checkStatus()
-  }, 1000)
+  clearTimer()
+  timer = setInterval(checkStatus, 1000)
 }
 
-onUnmounted(() => {
-  if (timer) clearInterval(timer)
-})
+async function checkStatus() {
+  const { data } = await checkStatusRequest(id.value)
+  const { status } = data
+  currentStatus.value = status
+
+  if (status === ScanStatusEnum.Confirmed) {
+    clearInterval(timer)
+    if (isLogin.value) return
+
+    loginStore.accountLoginAction({
+      name: 'admin1',
+      password: '123456'
+    })
+
+    isLogin.value = true
+  } else if (status === ScanStatusEnum.Expired || status === ScanStatusEnum.Canceled) {
+    clearInterval(timer)
+  }
+}
+
+function clearTimer() {
+  if (timer) {
+    clearInterval(timer)
+  }
+}
+
+onUnmounted(clearTimer)
 </script>
 
 <template>
