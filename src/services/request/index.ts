@@ -1,3 +1,4 @@
+import type { IBaseResult } from '@/types'
 import type { AxiosInstance } from 'axios'
 import axios from 'axios'
 import type AppRequestConfig from '../config/type'
@@ -6,7 +7,6 @@ class AppRequest {
   instance: AxiosInstance
   constructor(config: AppRequestConfig) {
     this.instance = axios.create(config)
-
     //全局拦截器
     this.instance.interceptors.request.use(
       (config) => {
@@ -34,15 +34,15 @@ class AppRequest {
     this.instance.interceptors.response.use(config.interceptors?.responseSuccessFn, config.interceptors?.responseFailureFn)
   }
 
-  request<T = any>(config: AppRequestConfig<T>) {
+  request<T = any>(config: AppRequestConfig<IBaseResult<T>>) {
     //方法拦截器
     if (config.interceptors?.requestSuccessFn) {
       config = config.interceptors.requestSuccessFn(config as any)
     }
 
-    return new Promise<T>((resolve, reject) => {
+    return new Promise<IBaseResult<T>>((resolve, reject) => {
       return this.instance
-        .request<any, T>(config)
+        .request<any, IBaseResult<T>>(config)
         .then((res) => {
           if (config.interceptors?.responseSuccessFn) {
             res = config.interceptors.responseSuccessFn(res)
@@ -54,16 +54,16 @@ class AppRequest {
         })
     })
   }
-  get<T = any>(config: AppRequestConfig<T>) {
+  get<T = any>(config: AppRequestConfig<IBaseResult<T>>) {
     return this.request({ ...config, method: 'GET' })
   }
-  post<T = any>(config: AppRequestConfig<T>) {
+  post<T = any>(config: AppRequestConfig<IBaseResult<T>>) {
     return this.request({ ...config, method: 'POST' })
   }
-  delete<T = any>(config: AppRequestConfig<T>) {
+  delete<T = any>(config: AppRequestConfig<IBaseResult<T>>) {
     return this.request({ ...config, method: 'DELETE' })
   }
-  patch<T = any>(config: AppRequestConfig<T>) {
+  patch<T = any>(config: AppRequestConfig<IBaseResult<T>>) {
     return this.request({ ...config, method: 'PATCH' })
   }
 }

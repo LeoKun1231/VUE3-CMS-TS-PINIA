@@ -4,13 +4,14 @@
  * @LastEditors: Leo l024983409@qq.com
  * @LastEditTime: 2023-10-12 14:06:12
  * @FilePath: \VUE3-CMS-TS-PINIA\src\views\login\c-cpns\pane-account.vue
- * @Description: 
+ * @Description:
 -->
 <script setup lang="ts">
 import useLoginStore from '@/store/login/login'
 
 import type { LoginAccount } from '@/types'
 import type { FormInstance, FormRules } from 'element-plus'
+const isKeepPassword = useLocalStorage('account', { isKeepPassword: false }, { mergeDefaults: true })
 
 //本地存储帐号密码
 const accountStorage = useLocalStorage('account', {
@@ -73,6 +74,14 @@ const loginAction = (isKeepPassword: boolean) => {
   })
 }
 
+/**
+ * @description:点击登录
+ * @return {*}
+ */
+const handleLoginAction = () => {
+  loginAction(isKeepPassword.value.isKeepPassword)
+}
+
 defineExpose({
   loginAction
 })
@@ -88,6 +97,15 @@ defineExpose({
         <el-input v-model="account.password" show-password />
       </el-form-item>
     </el-form>
+  </div>
+  <div class="login-pane__handle-password relative top-[-10px] flex items-center justify-between">
+    <el-checkbox v-model="isKeepPassword.isKeepPassword" label="记住密码" size="large" />
+    <el-link type="primary" :underline="false">忘记密码</el-link>
+  </div>
+  <div class="login-pane__sumbit">
+    <el-button auto-insert-space type="primary" class="w-full" size="large" @click="handleLoginAction" :loading="loginStore.isLogining">
+      立即登录
+    </el-button>
   </div>
 </template>
 <style scoped lang="less"></style>

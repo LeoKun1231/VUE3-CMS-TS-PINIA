@@ -6,35 +6,13 @@
  * @Description:
 -->
 <script setup lang="ts">
-import useLoginStore from '@/store/login/login'
 import PaneAccount from './pane-account.vue'
 import PanePhone from './pane-phone.vue'
 
 const activeTabName = ref('account')
-const isKeepPassword = useLocalStorage('account', { isKeepPassword: false }, { mergeDefaults: true })
 
 const paneAccount = ref<InstanceType<typeof PaneAccount>>()
 const panePhone = ref<InstanceType<typeof PanePhone>>()
-
-const loginStore = useLoginStore()
-
-//判断是否是帐号登录
-const isAccount = computed(() => {
-  return activeTabName.value == 'account'
-})
-
-/**
- * @description:点击登录
- * @return {*}
- */
-const handleLoginAction = () => {
-  //判断是帐号登录还是手机
-  if (isAccount) {
-    paneAccount.value?.loginAction(isKeepPassword.value.isKeepPassword)
-  } else {
-    // panePhone.value
-  }
-}
 </script>
 
 <template>
@@ -51,28 +29,16 @@ const handleLoginAction = () => {
           </template>
           <pane-account ref="paneAccount" />
         </el-tab-pane>
-        <el-tab-pane name="phone">
+        <el-tab-pane name="code" lazy>
           <template #label>
             <div class="flex items-center justify-center">
-              <i-ep-iphone />
-              <span class="ml-1">手机登录</span>
+              <span class="i-ep-full-screen"></span>
+              <span class="ml-1">二维码登录</span>
             </div>
           </template>
-          <pane-phone ref="panePhone" />
+          <pane-phone ref="panePhone" :activeTabName="activeTabName" />
         </el-tab-pane>
       </el-tabs>
-    </div>
-
-    <div class="login-pane__handle-password flex items-center justify-between" v-if="isAccount">
-      <el-checkbox v-model="isKeepPassword.isKeepPassword" label="记住密码" size="large" />
-      <el-link type="primary" :underline="false">忘记密码</el-link>
-    </div>
-    <div class="h-[40px] w-full" v-else></div>
-
-    <div class="login-pane__sumbit">
-      <el-button auto-insert-space type="primary" class="w-full" size="large" @click="handleLoginAction" :loading="loginStore.isLogining">
-        立即登录
-      </el-button>
     </div>
   </div>
 </template>

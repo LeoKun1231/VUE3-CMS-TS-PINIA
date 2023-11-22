@@ -5,6 +5,13 @@
  * @LastEditTime: 2023-01-05 14:27:45
  * @Description:
  */
+
+export interface IBaseResult<T> {
+  code: number
+  data: T
+  message: string
+}
+
 export * from './login'
 
 export * from './main/main'
