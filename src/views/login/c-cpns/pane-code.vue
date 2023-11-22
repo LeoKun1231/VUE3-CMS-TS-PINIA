@@ -24,23 +24,27 @@ const refresh = () => {
 const loginStore = useLoginStore()
 const currentStatus = ref<ScanStatusEnum>(ScanStatusEnum.NotScan)
 const isLogin = ref(false)
+const isLastRequestCompelted = ref(true)
+
 async function checkStatus() {
-  const { data } = await checkStatusRequest(id.value)
-  const { status } = data
-  currentStatus.value = status
-  if (status == ScanStatusEnum.Confirmed) {
-    console.log('login=====================')
-    clearInterval(timer)
-    if (isLogin.value) return
-    loginStore.accountLoginAction({
-      name: 'admin1',
-      password: '123456'
-    })
-    isLogin.value = true
-  } else if (status == ScanStatusEnum.Expired) {
-    clearInterval(timer)
-  } else if (status == ScanStatusEnum.Canceled) {
-    clearInterval(timer)
+  if (isLastRequestCompelted.value) {
+    const { data } = await checkStatusRequest(id.value)
+    const { status } = data
+    isLastRequestCompelted.value = false
+    currentStatus.value = status
+    if (status == ScanStatusEnum.Confirmed) {
+      clearInterval(timer)
+      if (isLogin.value) return
+      loginStore.accountLoginAction({
+        name: 'admin1',
+        password: '123456'
+      })
+      isLogin.value = true
+    } else if (status == ScanStatusEnum.Expired) {
+      clearInterval(timer)
+    } else if (status == ScanStatusEnum.Canceled) {
+      clearInterval(timer)
+    }
   }
 }
 
@@ -65,6 +69,7 @@ async function generateCode() {
   if (timer) clearInterval(timer)
   timer = setInterval(async () => {
     await checkStatus()
+    isLastRequestCompelted.value = true
   }, 1500)
 }
 
