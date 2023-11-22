@@ -6,6 +6,7 @@
  * @Description:
 -->
 <script setup lang="ts">
+import QRCODE from '@/assets/img/qrcode.png'
 import { ScanStatusEnum } from '@/enums/scan-status.enum'
 import { checkStatusRequest, generateQrcodeRequest } from '@/services/login/login'
 import useLoginStore from '@/store/login/login'
@@ -24,27 +25,23 @@ const refresh = () => {
 const loginStore = useLoginStore()
 const currentStatus = ref<ScanStatusEnum>(ScanStatusEnum.NotScan)
 const isLogin = ref(false)
-const isLastRequestCompelted = ref(true)
 
 async function checkStatus() {
-  if (isLastRequestCompelted.value) {
-    const { data } = await checkStatusRequest(id.value)
-    const { status } = data
-    isLastRequestCompelted.value = false
-    currentStatus.value = status
-    if (status == ScanStatusEnum.Confirmed) {
-      clearInterval(timer)
-      if (isLogin.value) return
-      loginStore.accountLoginAction({
-        name: 'admin1',
-        password: '123456'
-      })
-      isLogin.value = true
-    } else if (status == ScanStatusEnum.Expired) {
-      clearInterval(timer)
-    } else if (status == ScanStatusEnum.Canceled) {
-      clearInterval(timer)
-    }
+  const { data } = await checkStatusRequest(id.value)
+  const { status } = data
+  currentStatus.value = status
+  if (status == ScanStatusEnum.Confirmed) {
+    clearInterval(timer)
+    if (isLogin.value) return
+    loginStore.accountLoginAction({
+      name: 'admin1',
+      password: '123456'
+    })
+    isLogin.value = true
+  } else if (status == ScanStatusEnum.Expired) {
+    clearInterval(timer)
+  } else if (status == ScanStatusEnum.Canceled) {
+    clearInterval(timer)
   }
 }
 
@@ -67,9 +64,8 @@ async function generateCode() {
   url.value = data.url
 
   if (timer) clearInterval(timer)
-  timer = setInterval(async () => {
-    await checkStatus()
-    isLastRequestCompelted.value = true
+  timer = setInterval(() => {
+    checkStatus()
   }, 1500)
 }
 
@@ -83,7 +79,7 @@ onUnmounted(() => {
     <div class="flex justify-end w-full"></div>
     <div class="w-full flex justify-center items-center">
       <div class="w-[70%] relative flex justify-center items-center flex-col">
-        <img class="w-full cursor-pointer" :src="url" title="扫码登录" alt="QRcode" />
+        <img class="w-full cursor-pointer" :src="url || QRCODE" title="扫码登录" alt="QRcode" />
         <template v-if="currentStatus == ScanStatusEnum.Expired || currentStatus == ScanStatusEnum.Canceled">
           <div class="absolute w-full h-full bg-black opacity-50"></div>
           <div class="absolute w-full h-full text-white cursor-pointer text-lg flex justify-center items-center flex-col" @click="refresh">
