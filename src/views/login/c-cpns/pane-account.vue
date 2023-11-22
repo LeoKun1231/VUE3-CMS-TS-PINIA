@@ -21,7 +21,7 @@ const accountStorage = useLocalStorage('account', {
 
 //帐号密码
 const account = reactive<LoginAccount>({
-  name: accountStorage.value.name || 'coderwhy',
+  name: accountStorage.value.name || 'admin1',
   password: accountStorage.value.password || '123456'
 })
 
