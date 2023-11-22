@@ -23,16 +23,19 @@ const refresh = () => {
 
 const loginStore = useLoginStore()
 const currentStatus = ref<ScanStatusEnum>(ScanStatusEnum.NotScan)
+const isLogin = ref(false)
 async function checkStatus() {
   const { data } = await checkStatusRequest(id.value)
   const { status } = data
   currentStatus.value = status
   if (status == ScanStatusEnum.Confirmed) {
     clearInterval(timer)
+    if (isLogin.value) return
     loginStore.accountLoginAction({
       name: 'admin1',
       password: '123456'
     })
+    isLogin.value = true
   } else if (status == ScanStatusEnum.Expired) {
     clearInterval(timer)
   } else if (status == ScanStatusEnum.Canceled) {
