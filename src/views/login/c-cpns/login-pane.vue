@@ -7,12 +7,9 @@
 -->
 <script setup lang="ts">
 import PaneAccount from './pane-account.vue'
-import PanePhone from './pane-phone.vue'
+import PaneCode from './pane-code.vue'
 
 const activeTabName = ref('account')
-
-const paneAccount = ref<InstanceType<typeof PaneAccount>>()
-const panePhone = ref<InstanceType<typeof PanePhone>>()
 </script>
 
 <template>
@@ -27,7 +24,7 @@ const panePhone = ref<InstanceType<typeof PanePhone>>()
               <span class="ml-1">帐号登录</span>
             </div>
           </template>
-          <pane-account ref="paneAccount" />
+          <pane-account />
         </el-tab-pane>
         <el-tab-pane name="code" lazy>
           <template #label>
@@ -36,7 +33,7 @@ const panePhone = ref<InstanceType<typeof PanePhone>>()
               <span class="ml-1">二维码登录</span>
             </div>
           </template>
-          <pane-phone ref="panePhone" :activeTabName="activeTabName" />
+          <pane-code :activeTabName="activeTabName" />
         </el-tab-pane>
       </el-tabs>
     </div>
