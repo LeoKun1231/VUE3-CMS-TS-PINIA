@@ -6,6 +6,7 @@
  * @Description:
 -->
 <script setup lang="ts">
+import QRCODE from '@/assets/img/qrcode.png'
 import { ScanStatusEnum } from '@/enums/scan-status.enum'
 import { checkStatusRequest, generateQrcodeRequest } from '@/services/login/login'
 import useLoginStore from '@/store/login/login'
