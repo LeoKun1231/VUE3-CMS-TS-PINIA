@@ -8,7 +8,7 @@
 import type { AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 
 export interface AppInterceptor<T> {
-  requestSuccessFn?: (config: InternalAxiosRequestConfig & { showLoading?: boolean }) => InternalAxiosRequestConfig
+  requestSuccessFn?: (config: InternalAxiosRequestConfig & { showLoading?: boolean; skipError?: boolean }) => InternalAxiosRequestConfig
   requestFailureFn?: (err: any) => any
   responseSuccessFn?: (res: T) => T
   responseFailureFn?: (err: any) => any
@@ -17,4 +17,5 @@ export interface AppInterceptor<T> {
 export default interface AppRequestConfig<T = AxiosResponse> extends AxiosRequestConfig {
   interceptors?: AppInterceptor<T>
   showLoading?: boolean
+  skipError?: boolean
 }
