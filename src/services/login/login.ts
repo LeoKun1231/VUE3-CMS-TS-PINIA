@@ -36,6 +36,7 @@ export function generateQrcodeRequest() {
 export function checkStatusRequest(id: string) {
   return appRequest.get<CheckStatus>({
     url: '/qrcode/check/' + id,
-    showLoading: false
+    showLoading: false,
+    skipError: true
   })
 }

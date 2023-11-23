@@ -12,6 +12,7 @@ import { BASE_URL, TIME_OUT } from './config'
 import AppRequest from './request'
 
 let ElLoadingInstance: any = null
+let skipError: boolean = false
 
 const appRequest = new AppRequest({
   baseURL: BASE_URL,
@@ -19,6 +20,9 @@ const appRequest = new AppRequest({
   interceptors: {
     requestSuccessFn(config) {
       // console.log('实例请求成功')
+      if (config.skipError != undefined) {
+        skipError = config.skipError
+      }
       if (config!.showLoading) {
         ElLoadingInstance = ElLoading.service({
           fullscreen: true,
@@ -36,6 +40,10 @@ const appRequest = new AppRequest({
     },
     responseSuccessFn(res) {
       if (res instanceof AxiosError) {
+        if (skipError) {
+          skipError = false
+          return res
+        }
         if (ElLoadingInstance) {
           ElLoadingInstance.close()
         }
