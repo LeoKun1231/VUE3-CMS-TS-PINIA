@@ -24,6 +24,7 @@ let timer: any = null
 
 const loginStore = useLoginStore()
 generateCode()
+
 watch(
   () => props.activeTabName,
   (val) => {
@@ -68,6 +69,10 @@ function clearTimer() {
   if (timer) {
     clearInterval(timer)
   }
+}
+
+const refresh = () => {
+  generateCode()
 }
 
 onUnmounted(clearTimer)

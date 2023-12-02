@@ -10,7 +10,7 @@ import type { FormItemProps } from 'element-plus'
 
 interface SelectOptions {
   label: string
-  value: string
+  value: string | number
 }
 
 export interface AppFormItems extends Partial<FormItemProps> {

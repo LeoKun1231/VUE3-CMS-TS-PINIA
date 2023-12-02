@@ -48,8 +48,8 @@ export const modalConfig: ModalConfig = {
       prop: 'status',
       placeholder: '请选择商品状态',
       options: [
-        { value: '1', label: '可用' },
-        { value: '0', label: '下架' }
+        { value: 1, label: '可用' },
+        { value: 0, label: '下架' }
       ]
     },
     {
