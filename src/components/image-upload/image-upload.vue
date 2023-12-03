@@ -61,7 +61,7 @@ const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile) => {
 <template>
   <el-upload
     v-model:file-list="fileList"
-    action="api/upload/single"
+    action="proxy/upload/single"
     list-type="picture-card"
     :limit="1"
     :auto-upload="true"
