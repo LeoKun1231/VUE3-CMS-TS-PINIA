@@ -10,7 +10,6 @@ declare module '@vue/runtime-core' {
     BarEchart: typeof import('./src/components/echart/src/bar-echart.vue')['default']
     BaseEchart: typeof import('./src/components/echart/src/base-echart.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
-    ElAutocomplete: typeof import('element-plus/es')['ElAutocomplete']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBadge: typeof import('element-plus/es')['ElBadge']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
@@ -62,10 +61,8 @@ declare module '@vue/runtime-core' {
     IEpExpand: typeof import('~icons/ep/expand')['default']
     IEpFold: typeof import('~icons/ep/fold')['default']
     IEpInfoFilled: typeof import('~icons/ep/info-filled')['default']
-    IEpIphone: typeof import('~icons/ep/iphone')['default']
     IEpMessage: typeof import('~icons/ep/message')['default']
     IEpRefresh: typeof import('~icons/ep/refresh')['default']
-    IEpScan: typeof import('~icons/ep/scan')['default']
     IEpSearch: typeof import('~icons/ep/search')['default']
     IEpUnlock: typeof import('~icons/ep/unlock')['default']
     IEpUserFilled: typeof import('~icons/ep/user-filled')['default']
@@ -89,6 +86,5 @@ declare module '@vue/runtime-core' {
   }
   export interface ComponentCustomProperties {
     vInfiniteScroll: typeof import('element-plus/es')['ElInfiniteScroll']
-    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }
