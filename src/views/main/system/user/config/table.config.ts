@@ -18,7 +18,7 @@ export const tableConfig: TableConfig = {
     { type: 'selection', align: 'center' },
     { type: 'index', label: '序号', align: 'center', width: '60px' },
     { prop: 'name', label: '用户名', align: 'center', slotName: 'name' },
-    { prop: 'avatar', label: '用户名', align: 'center', slotName: 'avatar' },
+    { prop: 'avatar', label: '头像', align: 'center', slotName: 'avatar' },
     { prop: 'realname', label: '真实名', align: 'center', slotName: 'realname' },
     { prop: 'cellphone', label: '手机号码', align: 'center', width: '120px', slotName: 'cellphone', showOverflowTooltip: true },
     { type: 'switch', prop: 'enable', label: '状态', align: 'center', width: '100px', slotName: 'enable' },
