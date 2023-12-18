@@ -46,6 +46,7 @@ const { configRef: searchConfigRef } = useAddGoodsCategoryConfig(searchConfig)
       </template>
       <template #imgUrl="scope">
         <el-image
+          v-if="scope.row.imgUrl"
           style="width: 75px; height: 75px"
           :src="scope.row.imgUrl"
           :zoom-rate="1.2"

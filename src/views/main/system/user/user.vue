@@ -56,6 +56,16 @@ const { configRef: searchConfigRef } = useAddRole2Config(searchConfigRefForDept.
       <template #updateAt="scope">
         <span>{{ formatTime(scope.row.updateAt) }}</span>
       </template>
+      <template #avatar="scope">
+        <el-image
+          v-if="scope.row.avatar"
+          style="width: 75px; height: 75px"
+          :src="scope.row.avatar"
+          :zoom-rate="1.2"
+          :preview-src-list="[scope.row.avatar]"
+          fit="cover"
+        />
+      </template>
     </page-content>
     <page-modal :modal-config="configRef" ref="pageModalRef" />
   </div>
