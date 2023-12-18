@@ -62,6 +62,7 @@ const { configRef: searchConfigRef } = useAddRole2Config(searchConfigRefForDept.
           style="width: 75px; height: 75px"
           :src="scope.row.avatar"
           :zoom-rate="1.2"
+          :preview-teleported="true"
           :preview-src-list="[scope.row.avatar]"
           fit="cover"
         />

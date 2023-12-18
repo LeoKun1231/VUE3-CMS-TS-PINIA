@@ -85,7 +85,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/proxy': {
-        target: 'https://hqk10.xyz:3000/proxy/v1',
+        target: 'https://hqk10.xyz:3000/api/v1',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/proxy/, '')
       }

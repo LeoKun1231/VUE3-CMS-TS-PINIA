@@ -49,6 +49,7 @@ const { configRef: searchConfigRef } = useAddGoodsCategoryConfig(searchConfig)
           v-if="scope.row.imgUrl"
           style="width: 75px; height: 75px"
           :src="scope.row.imgUrl"
+          :preview-teleported="true"
           :zoom-rate="1.2"
           :preview-src-list="[scope.row.imgUrl]"
           fit="cover"

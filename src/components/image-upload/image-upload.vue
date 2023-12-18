@@ -69,7 +69,7 @@ const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile) => {
     :before-upload="beforeAvatarUpload"
     :on-success="handleSuccess"
   >
-    <el-icon v-if="fileList.length == 0"><Plus /></el-icon>
+    <el-icon style="width: 104px; height: 104px" v-if="fileList.length == 0"><Plus /></el-icon>
 
     <template #file="{ file }">
       <img class="el-upload-list__item-thumbnail" :src="file.url" alt="" />

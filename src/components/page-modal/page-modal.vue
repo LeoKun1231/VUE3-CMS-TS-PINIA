@@ -77,7 +77,16 @@ defineExpose({
 
 <template>
   <div class="modal">
-    <el-dialog @close="handleClose" v-model="dialogVisible" :title="modalConfig.title" width="30%" center draggable top="5vh">
+    <el-dialog
+      @close="handleClose"
+      v-model="dialogVisible"
+      :title="modalConfig.title"
+      width="30%"
+      center
+      draggable
+      top="5vh"
+      destroy-on-close
+    >
       <el-form :model="formData" size="large" label-width="100px" class="pr-2">
         <template v-for="item in modalConfig.formItems" :key="item.prop">
           <template v-if="item.type == 'input'">
