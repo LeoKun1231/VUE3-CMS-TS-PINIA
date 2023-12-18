@@ -15,6 +15,7 @@ export const modalConfig: ModalConfig = {
     { type: 'input', label: '真实姓名', prop: 'realname', placeholder: '请输入真实姓名' },
     { type: 'input', label: '密码', prop: 'password', placeholder: '请输入密码' },
     { type: 'input', label: '电话号码', prop: 'cellphone', placeholder: '请输入电话号码' },
+    { type: 'upload', label: '头像', prop: 'avatar', placeholder: '请选择头像' },
     { type: 'select', label: '角色', prop: 'roleId', placeholder: '请选择角色', options: [] },
     { type: 'select', label: '部门', prop: 'departmentId', placeholder: '请选择部门', options: [] }
   ]
