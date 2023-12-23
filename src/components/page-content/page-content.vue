@@ -20,7 +20,7 @@ const emits = defineEmits<{
 }>()
 
 const mainStore = useMainStore()
-const { dataList, count, pageSize, currentPage } = storeToRefs(mainStore)
+const { dataList, count, pageSize, currentPage, isLoading } = storeToRefs(mainStore)
 
 // 请求列表
 mainStore.queryDataListAction(props.tableConfig.pageName)
@@ -53,10 +53,13 @@ function queryDataList(data?: any) {
   mainStore.queryDataListAction(props.tableConfig.pageName, data)
 }
 
-function handleSwitchChange(row: any, itemProp: any) {
-  mainStore.patchDataAction(props.tableConfig.pageName, row.id, {
+async function handleSwitchChange(row: any, itemProp: any) {
+  row[itemProp + 'IsLoading'] = true
+
+  await mainStore.patchDataAction(props.tableConfig.pageName, row.id, {
     [itemProp]: row[itemProp]
   })
+  row[itemProp + 'IsLoading'] = false
 }
 
 //重置
@@ -84,6 +87,7 @@ defineExpose({
       border
       :row-key="tableConfig.table?.rowKey"
       :tree-props="tableConfig.table?.treeProps"
+      v-loading="isLoading"
     >
       <template v-for="item in tableConfig.propsList" :key="item.prop">
         <template v-if="item.type == 'selection'">
@@ -100,6 +104,7 @@ defineExpose({
                 :active-value="1"
                 :inactive-value="0"
                 inline-prompt
+                :loading="row[item.prop + 'IsLoading']"
                 active-text="启用"
                 inactive-text="禁用"
                 @click="handleSwitchChange(row, item.prop)"

@@ -23,6 +23,8 @@ const useMainStore = defineStore('main', () => {
   //判断菜单是否展开
   const isMenuExpand = ref(false)
 
+  const isLoading = ref(false)
+
   //请求角色列表
   const roleList = ref<RoleInfo[]>()
   //角色列表
@@ -71,6 +73,7 @@ const useMainStore = defineStore('main', () => {
 
   //查询数据
   async function queryDataListAction(pageName: string, data?: any) {
+    isLoading.value = true
     const res = await queryDataList(pageName, {
       size: pageSize.value,
       offset: (currentPage.value - 1) * pageSize.value,
@@ -78,6 +81,7 @@ const useMainStore = defineStore('main', () => {
     })
     dataList.value = res.data?.list
     count.value = res.data?.totalCount
+    isLoading.value = false
   }
 
   //删除数据
@@ -144,6 +148,7 @@ const useMainStore = defineStore('main', () => {
   }
 
   return {
+    isLoading,
     isMenuExpand,
     roleList,
     departmentList,
