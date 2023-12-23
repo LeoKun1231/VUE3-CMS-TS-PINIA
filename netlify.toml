@@ -1,4 +1,4 @@
 [[redirects]]
   from = "/proxy/*"
-  to = "https://hqk10.xyz/api/v1/:splat"
+  to = "https://hqk10.xyz:3000/api/v1/:splat"
   status = 200
