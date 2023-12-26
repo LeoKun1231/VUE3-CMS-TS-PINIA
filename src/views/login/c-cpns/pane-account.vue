@@ -15,7 +15,7 @@ const isKeepPassword = useLocalStorage('account', { isKeepPassword: false }, { m
 
 //本地存储帐号密码
 const accountStorage = useLocalStorage('account', {
-  name: 'coderwhy',
+  name: 'admin1',
   password: '123456'
 })
 

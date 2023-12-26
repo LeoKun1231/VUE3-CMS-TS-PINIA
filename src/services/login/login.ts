@@ -22,7 +22,7 @@ export function getUserInfoRequest(id: number) {
 }
 
 export function getUserMenusRequest(id: number) {
-  return appRequest.get<MenuInfo>({
+  return appRequest.get<MenuInfo[]>({
     url: `/role/` + id + `/menu`
   })
 }

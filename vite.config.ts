@@ -76,11 +76,11 @@ export default defineConfig({
           echarts: ['echarts']
         }
       }
-    }
+    },
     //   关闭生成map文件 可以达到缩小打包体积
-    // sourcemap: false
+    sourcemap: false,
     //   关闭文件计算
-    // reportCompressedSize: false
+    reportCompressedSize: false
   },
   server: {
     proxy: {

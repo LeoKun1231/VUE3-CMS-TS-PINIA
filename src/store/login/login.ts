@@ -38,26 +38,23 @@ const useLoginStore = defineStore('login', {
 
         // 4.根据用户菜单匹配本地route动态注册路由
         this.menuInfo = menuInfo
-        this.refreshData()
-
-        this.isLogining = false
+        await this.refreshData()
         ElMessage.success({ message: '登陆成功' })
+        this.isLogining = false
         router.push({ path: '/main' })
       } catch (error) {
         this.isLogining = false
       }
     },
-    refreshData() {
+    async refreshData() {
       // 防止刷新数据丢失
       // 1. 从菜单信息中遍历得出路由，动态注册路由
       const mainRoutes = mapMenu2Routes(this.menuInfo)
       mainRoutes.forEach((mainRoutesItem) => router.addRoute('main', mainRoutesItem))
-
       useLocalStorage('mainRoutes', mainRoutes)
-
       //2.获取部门和角色列表
       const mainStore = useMainStore()
-      mainStore.postAllListAction()
+      await mainStore.postAllListAction()
     }
   },
   persist: {

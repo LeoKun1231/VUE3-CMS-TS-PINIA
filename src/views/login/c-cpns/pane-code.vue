@@ -40,7 +40,6 @@ async function generateCode() {
   const { data } = await generateQrcodeRequest()
   id.value = data.id
   url.value = data.url
-
   clearTimer()
   timer = setInterval(checkStatus, 1000)
 }
@@ -79,11 +78,12 @@ onUnmounted(clearTimer)
 </script>
 
 <template>
-  <div class="flex justify-center items-center flex-col w-250px h-205px">
+  <div class="flex justify-center items-center flex-col w-full h-205px">
     <div class="flex justify-end w-full"></div>
     <div class="w-full flex justify-center items-center">
-      <div class="w-[70%] relative flex justify-center items-center flex-col">
-        <img class="w-full cursor-pointer" :src="url || QRCODE" title="扫码登录" alt="QRcode" />
+      <div class="relative flex justify-center items-center">
+        <img class="w-full cursor-pointer" v-if="url" :src="url || QRCODE" title="扫码登录" alt="QRcode" />
+        <img class="w-[140px] h-[140px] cursor-pointer" v-else :src="QRCODE" title="扫码登录" alt="QRcode" />
         <template v-if="currentStatus == ScanStatusEnum.Expired || currentStatus == ScanStatusEnum.Canceled">
           <div class="absolute w-full h-full bg-black opacity-50"></div>
           <div class="absolute w-full h-full text-white cursor-pointer text-lg flex justify-center items-center flex-col" @click="refresh">
