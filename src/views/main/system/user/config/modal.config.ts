@@ -9,7 +9,7 @@ import type { ModalConfig } from '@/types/config/modal.config'
 
 export const modalConfig: ModalConfig = {
   pageName: 'users',
-  title: '新建用户',
+  title: '用户',
   formItems: [
     { type: 'input', label: '用户名', prop: 'name', placeholder: '请输入用户名' },
     { type: 'input', label: '真实姓名', prop: 'realname', placeholder: '请输入真实姓名' },

@@ -9,7 +9,7 @@ import type { ModalConfig } from '@/types/config/modal.config'
 
 export const modalConfig: ModalConfig = {
   pageName: 'menu',
-  title: '新建菜单',
+  title: '菜单',
   formItems: [
     {
       type: 'input',

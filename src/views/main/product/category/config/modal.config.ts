@@ -9,7 +9,7 @@ import type { ModalConfig } from '@/types/config/modal.config'
 
 export const modalConfig: ModalConfig = {
   pageName: 'category',
-  title: '新建商品',
+  title: '商品',
   formItems: [
     {
       type: 'input',

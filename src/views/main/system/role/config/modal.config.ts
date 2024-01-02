@@ -9,7 +9,7 @@ import type { ModalConfig } from '@/types/config/modal.config'
 
 export const modalConfig: ModalConfig = {
   pageName: 'role',
-  title: '新建角色',
+  title: '角色',
   formItems: [
     {
       type: 'input',

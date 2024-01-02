@@ -63,7 +63,7 @@ const number2 = useTransition(number2Ref, { transition: TransitionPresets.easeIn
     <el-divider />
     <div class="flex items-center h-7.5 text-[#666] text-xs">
       <div class="mr-4">{{ goodsAmount.subtitle }}</div>
-      <div>{{ '￥' + formatIntNumber(number2.toFixed(0)) }}</div>
+      <div>{{ formatIntNumber(number2.toFixed(0)) }}</div>
       <div></div>
     </div>
   </div>

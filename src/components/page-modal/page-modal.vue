@@ -70,6 +70,10 @@ const handleClose = () => {
   emits('close')
 }
 
+const dialogTitle = computed(() => {
+  return isCreateRef.value ? `新建${props.modalConfig.title}` : `修改${props.modalConfig.title}`
+})
+
 defineExpose({
   setDialogVisible
 })
@@ -77,16 +81,7 @@ defineExpose({
 
 <template>
   <div class="modal">
-    <el-dialog
-      @close="handleClose"
-      v-model="dialogVisible"
-      :title="modalConfig.title"
-      width="30%"
-      center
-      draggable
-      top="5vh"
-      destroy-on-close
-    >
+    <el-dialog @close="handleClose" v-model="dialogVisible" :title="dialogTitle" width="30%" center draggable top="5vh" destroy-on-close>
       <el-form :model="formData" size="large" label-width="100px" class="pr-2">
         <template v-for="item in modalConfig.formItems" :key="item.prop">
           <template v-if="item.type == 'input'">

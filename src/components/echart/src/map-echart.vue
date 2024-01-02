@@ -47,13 +47,15 @@ const option = computed<EChartsOption>(() => {
       // 设置使用的地图(注册过的china地址)
       map: 'china',
       // 漫步: 支持鼠标缩放效果
-      roam: 'scale',
+      roam: true,
       emphasis: {
-        areaColor: '#f4cccc',
         borderColor: 'rgb(9, 54, 95)',
         itemStyle: {
-          areaColor: '#f4cccc'
+          areaColor: '#fff'
         }
+      },
+      itemStyle: {
+        areaColor: '#101010'
       }
     },
     series: [
