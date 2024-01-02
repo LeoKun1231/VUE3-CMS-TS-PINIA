@@ -40,7 +40,7 @@ const option = computed<EChartsOption>(() => {
         color: ['rgb(70, 240, 252)', 'rgb(250, 220, 46)', 'rgb(245, 38, 186)']
       },
       textStyle: {
-        color: '#fff'
+        color: '#101010'
       }
     },
     geo: {
@@ -51,11 +51,8 @@ const option = computed<EChartsOption>(() => {
       emphasis: {
         borderColor: 'rgb(9, 54, 95)',
         itemStyle: {
-          areaColor: '#fff'
+          areaColor: '#f4cccc'
         }
-      },
-      itemStyle: {
-        areaColor: '#101010'
       }
     },
     series: [

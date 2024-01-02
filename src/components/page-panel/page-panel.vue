@@ -12,6 +12,7 @@ import { formatIntNumber } from '@/utils/format-number'
 
 interface Prop {
   goodsAmount: GoodsAmountInfo
+  prefix?: string
 }
 
 const props = defineProps<Prop>()
@@ -59,11 +60,11 @@ const number2 = useTransition(number2Ref, { transition: TransitionPresets.easeIn
         </template>
       </el-popover>
     </div>
-    <div class="text-2xl my-2">{{ '￥' + formatIntNumber(number1.toFixed(0)) }}</div>
+    <div class="text-2xl my-2">{{ prefix + formatIntNumber(number1.toFixed(0)) }}</div>
     <el-divider />
     <div class="flex items-center h-7.5 text-[#666] text-xs">
-      <div class="mr-4">{{ goodsAmount.subtitle }}</div>
-      <div>{{ formatIntNumber(number2.toFixed(0)) }}</div>
+      <div class="mr-1">{{ goodsAmount.subtitle }}</div>
+      <div>{{ prefix + formatIntNumber(number2.toFixed(0)) }}</div>
       <div></div>
     </div>
   </div>

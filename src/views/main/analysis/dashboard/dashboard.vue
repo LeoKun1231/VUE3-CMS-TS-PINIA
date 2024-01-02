@@ -47,7 +47,7 @@ const goodsCategorySale = computed(() => {
       <el-row class="w-full" :gutter="10">
         <template v-for="(item, index) in analysisStore.goodsAmountList" :key="index">
           <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
-            <page-panel :goods-amount="item" />
+            <page-panel :goods-amount="item" :prefix="index == analysisStore.goodsAmountList.length - 1 ? '￥' : ''" />
           </el-col>
         </template>
       </el-row>
