@@ -1,2 +1,32 @@
 @import './common.less';
 @import './reset.less';
+
+/* 修改垂直滚动条 */
+::-webkit-scrollbar {
+  width: 8px; /* 修改宽度 */
+}
+
+/* 修改滚动条轨道背景色 */
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+/* 修改滚动条滑块颜色 */
+::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+}
+
+/* 修改滚动条滑块悬停时的颜色 */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #ddd;
+}
+
+/* 修改滚动条滑块移动时的颜色 */
+::-webkit-scrollbar-thumb:active {
+  background-color: #ddd;
+}
+
+/* 修改滚动条滑块的圆角 */
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+}

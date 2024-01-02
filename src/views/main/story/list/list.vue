@@ -30,6 +30,9 @@ function loadMoreStory() {
 <style scoped lang="less">
 .list {
   height: 100%;
+  padding-bottom: 20px;
+  padding: 0 10px;
+  overflow: auto;
   &-comment {
     &:not(:first-child) {
       margin-top: 20px;

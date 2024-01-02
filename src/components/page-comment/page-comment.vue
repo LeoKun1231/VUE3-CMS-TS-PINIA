@@ -29,7 +29,7 @@ defineProps<Prop>()
         <div class="comment-date text-gray">{{ formatTime(comment.createAt) }}</div>
       </div>
     </div>
-    <div class="comment-content mt-5" v-html="comment.content"></div>
+    <div class="comment-content mt-5 text-justify" v-html="comment.content"></div>
   </div>
 </template>
 <style scoped lang="less"></style>
