@@ -25,7 +25,7 @@ defineProps<Prop>()
         </el-avatar>
       </div>
       <div class="comment-title-date w-full ml-4 flex justify-between">
-        <div class="comment-title text-black border-b-2 border-gray">{{ comment.title }}</div>
+        <div class="comment-title text-black border-b-2 border-gray max-w-60 truncate">{{ comment.title }}</div>
         <div class="comment-date text-gray">{{ formatTime(comment.createAt) }}</div>
       </div>
     </div>
