@@ -33,9 +33,11 @@ const defaultActiveMenu = computed(() => {
 
 <template>
   <div class="menu h-full w-full">
-    <h1 class="w-full h-16 center text-[#b7bdc3] bg-[#001529]">
-      <i-ep-element-plus />
-      <span class="ml-1" v-show="!isMenuExpand">后台管理系统</span>
+    <h1 class="w-full h-16 text-[#b7bdc3] bg-[#001529]">
+      <div center h-full>
+        <i-ep-element-plus text-xl />
+        <span class="ml-1 text-xl" v-show="!isMenuExpand">后台管理系统</span>
+      </div>
     </h1>
     <el-menu class="menu__body w-full h-[calc(100%-60px)] !border-r-0" :collapse="isMenuExpand" :default-active="defaultActiveMenu">
       <template v-for="item in menuInfo" :key="item.id">
