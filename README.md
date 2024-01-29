@@ -1,5 +1,8 @@
 # VUE3-CMS-TS-PINIA
 
+##后端地址
+<a href="https://github.com/LeoKun1231/nest-cms-api">后端仓库地址，采用nest框架</a>
+
 ## 介绍
 
 **VUE3**+**Pinia**+**Pnpm**+**Ts**+**tailwindcss**+**ElementPlus**+**VueRouter**+**VueUse**+**axios**
@@ -22,6 +25,4 @@ pnpm commit
 git push origin main
 ```
 
-## IDE 推荐使用 VScode
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
